@@ -1,0 +1,71 @@
+body{
+    background-color: #9437FF;;
+}
+
+#wrapper-div{
+    display: flex;
+}
+
+#headerEl{
+    color: white;
+    margin-left: 550px;
+    font-size: 70px;
+}
+
+#project-adder{
+    background-color: white;
+    height: 500px;
+    width: 350px;
+    margin-left: -800px;
+    margin-top: 180px;
+    border-radius: 5%;
+    position: relative;
+}
+
+#worker-adder{
+    background-color: white;
+    height: 500px;
+    width: 350px;
+    margin-left: 390px;
+    margin-top: 180px;
+    border-radius: 5%;
+    position: relative;
+}
+
+#pInputs-div{
+    margin-left: 10px;
+}
+
+#wInputs-div{
+    margin-left: 10px;
+}
+
+#pBtn-div{
+    margin-top: 50px;
+    margin-left: 180px;
+    position: relative;  
+}
+
+#wBtn-div{
+    margin-top: 265px;
+    margin-left: 175px;
+    position: relative;  
+}
+
+#addProjectBtn{
+    margin-right: 10px;
+   
+}
+
+.btns{
+    border-radius: 15%;
+}
+
+.inputs{
+    border-radius: 7%;
+}
+
+.subHeaders{
+    text-align: center;
+}
+
