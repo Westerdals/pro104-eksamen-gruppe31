@@ -1,0 +1,83 @@
+<html>
+    
+<head>
+    
+    <link rel="stylesheet" type="text/css" href="prov.css">
+    
+    </head>
+
+<body>
+    
+    
+    <div class="dropdown">
+    
+    <div class="dropdown-btn" id="status-btn"><h1>No status</h1></div>
+        <ul class="status-ul">
+        
+            <li><a href="#" id="status-work">Working on it</a></li>
+            <li><a href="#" id="status-stuck">Stuck</a></li>
+            <li><a href="#" id="status-done">Done</a></li>
+        
+        
+        </ul>
+    
+    
+    </div>
+    
+    
+    
+    <div class="dropdown2">
+    
+    <div class="dropdown-btn" id="priority-btn"><h1>No priority</h1></div>
+        <ul class="status-ul">
+        
+            <li><a href="#" id="priority-urgent">Urgent</a></li>
+            <li><a href="#" id="priority-medium">Medium</a></li>
+            <li><a href="#" id="priority-low">Low</a></li>
+        
+        
+        </ul>
+    
+    
+    </div> 
+    
+    
+    
+    
+    <script>
+        
+        
+        const priorityBtn = document.getElementById("priority-btn");
+        
+        
+        const priorityUrgent = document.getElementById("priority-urgent");
+        
+        const priorityMedium = document.getElementById("priority-medium");
+        
+        const priorityLow = document.getElementById("priority-low");
+        
+        
+        priorityMedium.onclick = changePriority;
+        
+        priorityUrgent.onclick = changePriority;
+        
+        priorityLow.onclick = changePriority;
+        
+        function changePriority(){
+            
+            
+            priorityBtn.style.backgroundColor="orangered";
+            
+            priorityBtn.innerHTML = `<h1>Urgent</h1>`;
+            
+        }
+    
+        
+    
+    </script>
+    
+    </body>
+
+
+
+</html>
