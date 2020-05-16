@@ -9,7 +9,7 @@
 .dropdown2{
     
     position:absolute;
-    top:20%;
+    top:50%;
     left:40%;
 }
 
@@ -35,7 +35,7 @@
 
 
 
-.status-ul{
+.dropdown-ul{
     
     position:absolute;
     margin:0;
@@ -46,14 +46,14 @@
 }
 
 
-.status-ul li{
+.dropdown-ul li{
     
     list-style: none;
     
 }
 
 
-.status-ul li a{
+.dropdown-ul li a{
     
     display:block;
     padding:10px;
@@ -65,7 +65,7 @@
     
 }
 
-#status-work{
+#status-working{
     background-color:aqua;
 }
 
@@ -91,13 +91,13 @@
 }
 
 
-.dropdown-btn:hover + .status-ul{
+.dropdown-btn:hover + .dropdown-ul{
     
     display:block;
     
 }
 
-.status-ul:hover{
+.dropdown-ul:hover{
     
     display:block;
 }
