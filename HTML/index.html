@@ -11,6 +11,8 @@
             <h1 id = "headerEl">Project Manager</h1>
             <div id = "project-adder">
 
+                <!-- TODO : legge til form-funksjonalitet -->
+
                 <h2 class = "subHeaders">New project</h2>
                 
                 <div id = "pInputs-div">
@@ -40,21 +42,22 @@
             </div>
             <div id = "worker-adder">
                 <h2 class = "subHeaders">Add team member</h2>
-                <div id = "wInputs-div">
-                <p>Name:</p>
-                <input type = "text" id = "workerName" class = "inputs">
+                <form onsubmit="createNewTeamMember(event)">
+                 <div id = "wInputs-div">
+                 <p>Name:</p>
+                 <input type = "text" id = "workerName" class = "inputs">
                 
-                <p>Title:</p>
-                <input type = "text" id = "workerTitle" class = "inputs">
+                 <p>Title:</p>
+                  <input type = "text" id = "workerTitle" class = "inputs">
 
-                <div id = "wBtn-div">
-                    <button id = "addProjectBtn" class = "btns">Add project</button>
+                  <div id = "wBtn-div">
+                    <button id = "addProjectBtn" class = "btns" type="submit">Add team member</button>
                     <button id = "assignBtn" class = "btns">Assign</button>
-                </div>
+                 </div>
+                    <!-- TODO : legge til forskjellige funksjoner til hver av knappene -->
+                </form>
             </div>
             </div>
-
-        </div>
     </body>
 </html>
 
