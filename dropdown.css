@@ -2,21 +2,21 @@
     
     position:absolute;
     top:20%;
-    left:20%;
+    left:5%;
     
 }
 
 .dropdown2{
     
     position:absolute;
-    top:50%;
+    top:20%;
     left:40%;
 }
 
 
 .dropdown-btn{
     
-    position:relative;
+    
     width:200px;
     height:60px;
     background-color: lightgray;
@@ -101,6 +101,3 @@
     
     display:block;
 }
-
-
-
