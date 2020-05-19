@@ -69,3 +69,17 @@ html{
     text-align: center;
 }
 
+#worker-list-container{
+    
+    background-color:lightcyan;
+    position:absolute;
+    border-radius:10px;
+    border:2px solid black;
+    top:10%;
+    left:18%;
+    margin:10px;
+    padding:10px;
+   
+    
+}
+
