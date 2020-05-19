@@ -83,12 +83,7 @@ html{
     right: 10%;
     position: absolute;
 }
-#memberAssignBtn{
-    bottom: 10%;
-    right: 10%;
-    margin: 10px;
-    position: absolute;
-}
+
 
 .btns{
     border-radius: 3px;
