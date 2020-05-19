@@ -6,9 +6,9 @@ function createNewTeamMember(memberInfo){
 
     const memberData = {teamMemberName, jobTitle};
 
-    const memberList = JSON.parse(window.localStorage.getItem("memberlist")) || [];
+    const memberList = JSON.parse(window.localStorage.getItem("memberList")) || [];
     memberList.push(memberData);
-    window.localStorage.setItem("memberlist", JSON.stringify(memberList));
+    window.localStorage.setItem("memberList", JSON.stringify(memberList));
 
     // renderMemberList(); fikse senere
 
@@ -20,18 +20,16 @@ function createNewProject(event){
     event.preventDefault();
 
     const projectName = document.querySelector("[id='projectNameInput']").value;
-    const taskInput = document.querySelector("[id='taskInput']").value;
-    const taskDescription = document.querySelector("[id='descriptionInput']").value;
-    const startDate = document.querySelector("[id='startDateInput']").value;
-    const dueDate = document.querySelector("[id='dueDateInput']").value;
+    var startDate = document.querySelector("[id='startDateInput']").value;
+    var dueDate = document.querySelector("[id='dueDateInput']").value;
 
 
-    const project = {projectName,taskInput,taskDescription,startDate,dueDate};
+    const projectData = {projectName,startDate,dueDate};
 
 
-    const taskList = JSON.parse(window.localStorage.getItem("projectList")) || [];
-    taskList.push(project);
-    window.localStorage.setItem("project", JSON.stringify(project));
+    const projectList = JSON.parse(window.localStorage.getItem("projectList")) || [];
+    projectList.push(projectData);
+    window.localStorage.setItem("projectList", JSON.stringify(projectList));
     // renderTaskManager(); fikse denne senere
 
     event.target.reset();
