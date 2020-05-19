@@ -12,8 +12,6 @@ function createNewTeamMember(memberInfo){
     window.localStorage.setItem("memberList", JSON.stringify(memberList));
     
     renderWorkerList();
-    
-    // renderMemberList(); fikse senere
 
     memberInfo.target.reset();
 
@@ -24,9 +22,16 @@ function renderWorkerList(){
     const memberList = JSON.parse(window.localStorage.getItem("memberList")) || [];
     const workerList = document.getElementById("worker-list");
     workerList.innerHTML = "";
-    
-    for(memberData of memberList){
+        
+        if(teamMemberName === ""){
+            
+            alert("Worker needs a name");
+        }else{
+            for(memberData of memberList){
         const workerEl = document.createElement("div");
+        
+        workerEl.draggable = true;
+        
         var {teamMemberName, jobTitle} = memberData;
         workerEl.style.border = "2px solid black";
         workerEl.style.borderRadius="50%";
@@ -34,12 +39,14 @@ function renderWorkerList(){
         workerEl.style.backgroundColor="lightgreen";
         workerEl.innerHTML = "<h4>" + teamMemberName + "</h4>" + "<p>" + jobTitle + "</p>";
         workerList.appendChild(workerEl);
+            
+        }
+        
+        
     }
     
 }
 
-
- 
 
 function createNewProject(event){
     event.preventDefault();
