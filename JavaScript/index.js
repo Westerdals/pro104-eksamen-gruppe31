@@ -2,12 +2,13 @@
 function createNewTeamMember(memberInfo){
     memberInfo.preventDefault();
 
-    const teamMemberName = document.querySelector("[id='workerName']").value;
-    const jobTitle = document.querySelector("[id='workerTitle']").value;
+    var teamMemberName = document.querySelector("[id='workerName']").value;
+    var jobTitle = document.querySelector("[id='workerTitle']").value;
 
-    const memberData = {teamMemberName, jobTitle};
+    var memberData = {teamMemberName, jobTitle};
 
     const memberList = JSON.parse(window.localStorage.getItem("memberList")) || [];
+    
     memberList.push(memberData);
     window.localStorage.setItem("memberList", JSON.stringify(memberList));
     
@@ -23,11 +24,8 @@ function renderWorkerList(){
     const workerList = document.getElementById("worker-list");
     workerList.innerHTML = "";
         
-        if(teamMemberName === ""){
-            
-            alert("Worker needs a name");
-        }else{
-            for(memberData of memberList){
+     
+    for(memberData of memberList){
         const workerEl = document.createElement("div");
         
         workerEl.draggable = true;
@@ -36,6 +34,7 @@ function renderWorkerList(){
         workerEl.style.border = "2px solid black";
         workerEl.style.borderRadius="50%";
         workerEl.style.textAlign="center";
+        workerEl.style.marginTop="2px";
         workerEl.style.backgroundColor="lightgreen";
         workerEl.innerHTML = "<h4>" + teamMemberName + "</h4>" + "<p>" + jobTitle + "</p>";
         workerList.appendChild(workerEl);
@@ -45,8 +44,6 @@ function renderWorkerList(){
         
     }
     
-}
-
 
 function createNewProject(event){
     event.preventDefault();
