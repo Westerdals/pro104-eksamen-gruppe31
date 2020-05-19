@@ -1,68 +1,101 @@
-body{
-    background-color: #9437FF;;
+html{
+    background-image: linear-gradient(#DA6DE2, #685266);
 }
 
-#wrapper-div{
-    display: flex;
+
+#headerEl {
+    background-color: purple;
+    width: 700px;
+    height: 100px;
+    text-align: center;
+    position: absolute;
+    border-radius: 20px;
+    
 }
 
-#headerEl{
-    color: white;
-    margin-left: 550px;
+#headerText{
+    color: slateblue;
     font-size: 70px;
+    padding: 5px;
+    text-align: center;
+    position: absolute;
 }
+#container{
+    margin-left: auto;
+    margin-right: auto;
+    height: 800px;
+    width: 1200px;
+    display: flex;
+    position: relative;
+    
+}
+
 
 #project-adder{
-    background-color: white;
+    background-color: #4844BE;
     height: 500px;
     width: 350px;
-    margin-left: -800px;
+    margin-left: 0px;
     margin-top: 180px;
-    border-radius: 5%;
-    position: relative;
+    border-radius: 20px;
+    position: absolute;
 }
 
 #worker-adder{
-    background-color: white;
+    background-color: #2AA26A;
     height: 500px;
     width: 350px;
     margin-left: 390px;
     margin-top: 180px;
-    border-radius: 5%;
-    position: relative;
+    border-radius: 20px;
+    position: absolute;
 }
 
 #pInputs-div{
     margin-left: 10px;
+    position: absolute;
 }
 
 #wInputs-div{
     margin-left: 10px;
+    position: absolute;
 }
 
 #pBtn-div{
     margin-top: 50px;
     margin-left: 180px;
-    position: relative;  
+    position: absolute;  
 }
 
 #wBtn-div{
     margin-top: 265px;
     margin-left: 175px;
-    position: relative;  
+    position: absolute;  
 }
 
 #addProjectBtn{
     margin-right: 10px;
+    position: absolute;
    
+}
+#addWorkerBtn{
+    bottom: 10%;
+    right: 10%;
+    position: absolute;
+}
+#memberAssignBtn{
+    bottom: 10%;
+    right: 10%;
+    margin: 10px;
+    position: absolute;
 }
 
 .btns{
-    border-radius: 15%;
+    border-radius: 3px;
 }
 
 .inputs{
-    border-radius: 7%;
+    border-radius: 2px;
 }
 
 .subHeaders{

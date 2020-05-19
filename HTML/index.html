@@ -1,14 +1,20 @@
 
-<!doctype html>
+<!DOCTYPE html>
 <html>
     <head>
         <title> Project manager </title>
         <meta charset="utf-8"/>
-        <link rel="stylesheet" href="../CSS/main.css">
+        <link rel="stylesheet" type="text/css" href="../CSS/main.css">
     </head>
     <body>
-        <div id = "wrapper-div">
-            <h1 id = "headerEl">Project Manager</h1>
+        <div id = "container">
+            <header>
+                <div id="headerEl">
+                    <h1 id ="headerText">Project Manager</h1>
+                </div>
+            </header>
+        
+            
             <div id = "project-adder">
 
                 <h2 class = "subHeaders">New project</h2>
@@ -24,20 +30,18 @@
                 <input type = "text" id = "descriptionInput" class = "inputs">
                 
                 <p>Start date:</p>
-                <input type = "text" id = "startDateInput" class = "inputs">
+                <input type ="date" "text" id = "startDateInput" class = "inputs">
 
                 <p>Due date:</p>
-                <input type = "text" id = "dueDateInput" class = "inputs">
+                <input type ="date" "text" id = "dueDateInput" class = "inputs">
                 </div>
                 
                 
                 <div id = "pBtn-div">
                     <button id = "addProjectBtn" class = "btns">Add project</button>
-                    <button id = "assignBtn" class = "btns">Assign</button>
                 </div>
-
-
             </div>
+
             <div id = "worker-adder">
                 <h2 class = "subHeaders">Add team member</h2>
                 <div id = "wInputs-div">
@@ -48,8 +52,7 @@
                 <input type = "text" id = "workerTitle" class = "inputs">
 
                 <div id = "wBtn-div">
-                    <button id = "addProjectBtn" class = "btns">Add project</button>
-                    <button id = "assignBtn" class = "btns">Assign</button>
+                    <button id = "addWorkerBtn" class = "btns">Add worker</button>
                 </div>
             </div>
             </div>
