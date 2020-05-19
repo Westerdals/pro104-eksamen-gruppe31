@@ -13,6 +13,7 @@ function createNewTeamMember(memberInfo){
     // renderMemberList(); fikse senere
 
     memberInfo.target.reset();
+
 }
 
 function createNewProject(event){
