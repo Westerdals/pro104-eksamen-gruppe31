@@ -1,3 +1,4 @@
+
 function createNewTeamMember(memberInfo){
     memberInfo.preventDefault();
 
@@ -9,12 +10,43 @@ function createNewTeamMember(memberInfo){
     const memberList = JSON.parse(window.localStorage.getItem("memberList")) || [];
     memberList.push(memberData);
     window.localStorage.setItem("memberList", JSON.stringify(memberList));
-
-    // renderMemberList(); fikse senere
+    
+    renderWorkerList();
 
     memberInfo.target.reset();
 
 }
+
+function renderWorkerList(){
+    
+    const memberList = JSON.parse(window.localStorage.getItem("memberList")) || [];
+    const workerList = document.getElementById("worker-list");
+    workerList.innerHTML = "";
+        
+        if(teamMemberName === ""){
+            
+            alert("Worker needs a name");
+        }else{
+            for(memberData of memberList){
+        const workerEl = document.createElement("div");
+        
+        workerEl.draggable = true;
+        
+        var {teamMemberName, jobTitle} = memberData;
+        workerEl.style.border = "2px solid black";
+        workerEl.style.borderRadius="50%";
+        workerEl.style.textAlign="center";
+        workerEl.style.backgroundColor="lightgreen";
+        workerEl.innerHTML = "<h4>" + teamMemberName + "</h4>" + "<p>" + jobTitle + "</p>";
+        workerList.appendChild(workerEl);
+            
+        }
+        
+        
+    }
+    
+}
+
 
 function createNewProject(event){
     event.preventDefault();
@@ -34,3 +66,10 @@ function createNewProject(event){
 
     event.target.reset();
 }
+
+
+
+
+
+
+
