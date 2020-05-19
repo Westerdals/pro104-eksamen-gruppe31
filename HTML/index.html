@@ -13,8 +13,6 @@
                     <h1 id ="headerText">Project Manager</h1>
                 </div>
             </header>
-        
-            
             <div id = "project-adder">
 
                 <!-- TODO : legge til form-funksjonalitet -->
@@ -22,23 +20,21 @@
                 <h2 class = "subHeaders">New project</h2>
                 
                 <div id = "pInputs-div">
-                <p>Project name:</p>
-                <input type = "text" id = "projectNameInput" class = "inputs">
-                
-                <p>Task:</p>
-                <input type = "text" id = "taskInput" class = "inputs">
-                
-                <p>Task Description:</p>
-                <input type = "text" id = "descriptionInput" class = "inputs">
-                
-                <p>Start date:</p>
-                <input type ="date" "text" id = "startDateInput" class = "inputs">
+                    <p>Project name:</p>
+                        <input type = "text" id = "projectNameInput" class = "inputs">
 
-                <p>Due date:</p>
-                <input type ="date" "text" id = "dueDateInput" class = "inputs">
+                    <p>Task:</p>
+                        <input type = "text" id = "taskInput" class = "inputs">
+
+                    <p>Task Description:</p>
+                        <input type = "text" id = "descriptionInput" class = "inputs">
+
+                    <p>Start date:</p>
+                        <input type ="date" "text" id = "startDateInput" class = "inputs">
+
+                    <p>Due date:</p>
+                        <input type ="date" "text" id = "dueDateInput" class = "inputs">
                 </div>
-                
-                
                 <div id = "pBtn-div">
                     <button id = "addProjectBtn" class = "btns">Add project</button>
                 </div>
@@ -47,19 +43,15 @@
             <div id = "worker-adder">
                 <h2 class = "subHeaders">Add team member</h2>
                 <form onsubmit="createNewTeamMember(event)">
-                 <div id = "wInputs-div">
-                 <p>Name:</p>
-                 <input type = "text" id = "workerName" class = "inputs">
+                    <div id = "wInputs-div">
+                        <p>Name:</p>
+                        <input type = "text" id = "workerName" class = "inputs">
+                        <p>Title:</p>
+                        <input type = "text" id = "workerTitle" class = "inputs">
                     </div>
-                 <p>Title:</p>
-                  <input type = "text" id = "workerTitle" class = "inputs">
-
-                <div id = "wBtn-div">
-                    <button id = "addWorkerBtn" class = "btns">Add worker</button>
-                </div>
-                  <div id = "wBtn-div">
-                    <button id = "addProjectBtn" class = "btns" type="submit">Add team member</button>
-                 </div>
+                    <div id = "wBtn-div">
+                        <button id = "addWorkerBtn" class = "btns">Add worker</button>
+                    </div>
                     <!-- TODO : legge til forskjellige funksjoner til hver av knappene -->
                 </form>
             </div>
