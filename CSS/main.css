@@ -41,6 +41,7 @@ body {
 }
 
 #task-adder{
+    display: none;
     background-color: bisque;
     height: 430px;
     width: 200px;
