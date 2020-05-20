@@ -19,7 +19,7 @@ function createNewTeamMember(memberInfo){
 }
 
 function renderWorkerList(){
-    
+
     const memberList = JSON.parse(window.localStorage.getItem("memberList")) || [];
     const workerList = document.getElementById("worker-list");
     workerList.innerHTML = "";
@@ -48,21 +48,44 @@ function renderWorkerList(){
 function createNewProject(event){
     event.preventDefault();
 
-    const projectName = document.querySelector("[id='projectNameInput']").value;
-    var startDate = document.querySelector("[id='startDateInput']").value;
-    var dueDate = document.querySelector("[id='dueDateInput']").value;
-
+    var projectName = document.querySelector("[id='projectNameInput']").value;
+    var startDate = document.querySelector("[id='projectStartDateInput']").value;
+    var dueDate = document.querySelector("[id='projectDueDateInput']").value;
 
     const projectData = {projectName,startDate,dueDate};
 
 
-    const projectList = JSON.parse(window.localStorage.getItem("projectList")) || [];
+    var projectList = JSON.parse(window.localStorage.getItem("projectList")) || [];
     projectList.push(projectData);
     window.localStorage.setItem("projectList", JSON.stringify(projectList));
     // renderTaskManager(); fikse denne senere
 
     event.target.reset();
 }
+
+function addTaskToProject(taskInput, projectName){ 
+    //Man kan her evt sende inn projectName som parameter for å lage egen liste med unikt navn til prosjektets tasks
+    taskInput.preventDefault();
+
+    var taskName = document.querySelector("[id='taskName']").value;
+    var taskDescription = document.querySelector("[id='taskDescription']").value;
+    var taskStartDate = document.querySelector("[id='taskStartDateInput']").value;
+    var taskDueDate = document.querySelector("[id='taskDueDateInput']").value;
+    // var taskPriority = document.querySelector("[id='taskStartDateInput']").value;
+    //priority må fikses senere med dropdown meny
+
+    const taskData = {taskName,taskDescription,taskStartDate,taskDueDate};
+
+    //Her bestemmes navn på listen over tasks. Må ta stilling til dette senere, enten prosjektnavn som vi passer som parameter eller noe annet unikt
+    var taskListName = projectName + "TaskList";
+    
+    var taskArray = JSON.parse(window.localStorage.getItem(taskListName)) || []; //henter ut data fra localstorage ved gitt navn (og putter i midlertidig var taskArray) eller skaper nytt array
+    taskArray.push(taskData); //pusher ny data inn i array
+    window.localStorage.setItem(taskListName, JSON.stringify(taskArray)); //sender oppdatert array tilbake til localstorage
+
+    taskInput.target.reset();
+}
+
 
 
 
