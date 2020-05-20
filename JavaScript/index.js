@@ -63,10 +63,11 @@ function createNewProject(event){
     event.target.reset();
 }
 
-function addTaskToProject(taskInput, projectName){ 
+function addTaskToProject(taskInput){ 
     //Man kan her evt sende inn projectName som parameter for å lage egen liste med unikt navn til prosjektets tasks
     taskInput.preventDefault();
 
+    var projectName = document.querySelector("[id='project-name']").innerHTML;
     var taskName = document.querySelector("[id='taskName']").value;
     var taskDescription = document.querySelector("[id='taskDescription']").value;
     var taskStartDate = document.querySelector("[id='taskStartDateInput']").value;
@@ -77,13 +78,49 @@ function addTaskToProject(taskInput, projectName){
     const taskData = {taskName,taskDescription,taskStartDate,taskDueDate};
 
     //Her bestemmes navn på listen over tasks. Må ta stilling til dette senere, enten prosjektnavn som vi passer som parameter eller noe annet unikt
-    var taskListName = projectName + "TaskList";
+    var taskListName = projectName + " " + "TaskList";
     
     var taskArray = JSON.parse(window.localStorage.getItem(taskListName)) || []; //henter ut data fra localstorage ved gitt navn (og putter i midlertidig var taskArray) eller skaper nytt array
     taskArray.push(taskData); //pusher ny data inn i array
     window.localStorage.setItem(taskListName, JSON.stringify(taskArray)); //sender oppdatert array tilbake til localstorage
 
     taskInput.target.reset();
+}
+
+function generateTaskAdderDiv(projectName){
+    document.getElementById("task-adder").innerHTML = `
+    <h2 class="subHeaders">Add task</h2>
+                <form onsubmit="addTaskToProject(event)">
+                    <div id="tInputs-div">
+                        <p id="project-name">${projectName}</p>
+                        <p>Task name:</p>
+                        <input type="text" id="taskName" class="inputs">
+
+                        <p>Task description:</p>
+                        <input type="text" id="taskDescription" class="inputs">
+
+                        <p>Start date:</p>
+                        <input type ="date" id="taskStartDateInput" class="inputs">
+
+                        <p>Due date:</p>
+                        <input type ="date" id="taskDueDateInput" class="inputs">
+
+                        <p>Priority:</p>
+                        <!-- fikse at dropdown og velging av riktig prioritet senere her -->
+
+                        <button id = "addTaskBtn" class = "btns" type="submit">Add task to project</button>
+                    </div>
+                </form>
+                <button id = "addTaskBtnDone" class = "btns" onclick="removeTaskAdderDiv()">Done</button>
+                `;
+    
+    document.getElementById("project-name").style.display = "none";
+    document.getElementById("task-adder").style.display = "inline";
+}
+
+function removeTaskAdderDiv(){
+    document.getElementById("task-adder").style.display = "none";
+
 }
 
 

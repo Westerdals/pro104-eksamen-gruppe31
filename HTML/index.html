@@ -52,31 +52,14 @@
             </div>
 
             <div id="task-adder">
-                <h2 class="subHeaders">Add task</h2>
-                <form onsubmit="addTaskToProject(event, 'projectTestName')">
-                    <div id="tInputs-div">
-                        <p>Task name:</p>
-                        <input type="text" id="taskName" class="inputs">
-
-                        <p>Task description:</p>
-                        <input type="text" id="taskDescription" class="inputs">
-
-                        <p>Start date:</p>
-                        <input type ="date" id="taskStartDateInput" class="inputs">
-
-                        <p>Due date:</p>
-                        <input type ="date" id="taskDueDateInput" class="inputs">
-
-                        <p>Priority:</p>
-                        <!-- fikse at dropdown og velging av riktig prioritet senere her -->
-
-                        <button id = "addTastBtn" class = "btns" type="submit">Add task to project</button>
-                    </div>
-                </form>
+                <!-- Denne brukes til å generere innhold for å lage tasks. 
+                    Kan f.eks. gjøres usynlig som standard og gjøres synlig ved bruk av css i funksjonen som aktiverer og genererer innhold -->
             </div>
 
             <div>
-                <button onclick="testing('test string')">Test1</button>
+                <button onclick="generateTaskAdderDiv('Project name 1')">Test1</button>
+                <button onclick="generateTaskAdderDiv('Project name 2')">Test2</button>
+                <button onclick="generateTaskAdderDiv('Project name 3')">Test3</button>
             </div>
         </div>
 
