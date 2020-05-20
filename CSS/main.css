@@ -1,14 +1,31 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
 html{
     background-color: darkgray;
 }
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f1f1f1;
+    position: relative;
+    padding-bottom: 58px;
+    min-height: 100vh;
+  }
 
 #container{
     margin-left: auto;
     margin-right: auto;
     height: 150vh;
-    width: 1200px;
     display: flex;
     position: relative;
+    width: 90vw;
+    margin: 0 auto;
+    padding: 30px 20px;
+    min-height: calc(100vh - 1083.6px - 58.4px);
     
 }
 
@@ -79,8 +96,28 @@ html{
     left:20%;
     padding:10px;
     margin:5px;
-    
-   
-    
 }
+
+footer {
+    text-align: center;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    
+  }
+
+  #headerEl{
+      margin-left: 590px;
+      height: 150px;
+      width: 200px;
+      border-radius: 15%;
+      background-color: #333333;
+  }
+
+  #headerEl, img {
+      margin-top: -25px;
+  }
 
