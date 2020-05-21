@@ -26,6 +26,7 @@ body {
     margin: 0 auto;
     padding: 30px 20px;
     min-height: calc(100vh - 1083.6px - 58.4px);
+    border: 1px solid black;
     
 }
 
@@ -136,4 +137,27 @@ footer {
   #headerEl, img {
       margin-top: -25px;
   }
-
+#table-list{
+    position: absolute;
+    top: 200px;
+    left: 350px;
+    width: 75vw;
+}
+table{
+    border-collapse: collapse;
+    margin-bottom: 50px;
+}
+th{
+    border: 2px solid black;
+    height: 30px;
+    border-collapse: collapse;
+    background-color: lightgray;
+}
+td{
+    border: 1px solid black;
+    border-collapse: collapse;
+    height: 20px;
+    width: 200px;
+    background-color: aqua;
+    position: relative;
+}

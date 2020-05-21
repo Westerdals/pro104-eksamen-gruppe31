@@ -58,7 +58,7 @@ function createNewProject(event){
     var projectList = JSON.parse(window.localStorage.getItem("projectList")) || [];
     projectList.push(projectData);
     window.localStorage.setItem("projectList", JSON.stringify(projectList));
-    // renderTaskManager(); fikse denne senere
+    renderTaskManager();
 
     event.target.reset();
 }
@@ -123,10 +123,42 @@ function removeTaskAdderDiv(){
 
 }
 
-
-
-
-
+function renderTaskManager(){
+    let projectList = JSON.parse(window.localStorage.getItem("projectList")) || [];
+    let tableList = document.getElementById("table-list");
+    
+    const projectEl = document.createElement("div");
+    tableList.innerHTML = "";
+    for(const projectData of projectList){
+        var{projectName, startDate, dueDate} = projectData;
+        projectEl.innerHTML +=
+            `<h1 id="projectNameStyle">${projectName}</h1>
+                <table>
+                    <tr>
+                        <th>Task</th>
+                        <th id="task-description">Task description</th>
+                        <th>Start date</th>
+                        <th>Due date</th>
+                        <th>Workers</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                        <th>Reminder</th>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>${startDate}</td>
+                        <td>${dueDate}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>`;
+        tableList.appendChild(projectEl);
+    }
+}
+renderTaskManager();
 
 
 
