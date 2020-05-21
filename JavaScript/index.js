@@ -16,9 +16,6 @@ function createNewTeamMember(memberInfo){
     window.localStorage.setItem("memberList", JSON.stringify(memberList));
     }
     
-    memberList.push(memberData);
-    window.localStorage.setItem("memberList", JSON.stringify(memberList));
-    
     renderWorkerList();
 
     memberInfo.target.reset();
