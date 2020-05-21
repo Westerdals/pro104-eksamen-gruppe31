@@ -27,10 +27,13 @@ function renderWorkerList(){
     let memberList = JSON.parse(window.localStorage.getItem("memberList")) || [];
     let workerList = document.getElementById("worker-list");
     workerList.innerHTML = "";
-        
-    const workerEl = document.createElement("div"); 
+    
+    if (memberList == undefined){
+        memberList = [];
+    }
+     
     for(memberData of memberList){
-        
+        const workerEl = document.createElement("div");
         workerEl.draggable = true;
         
         var {teamMemberName, jobTitle} = memberData;
