@@ -9,6 +9,13 @@ function createNewTeamMember(memberInfo){
 
     const memberList = JSON.parse(window.localStorage.getItem("memberList")) || [];
     
+    if(teamMemberName.length === 0){
+        alert("Please fill in member")
+    }else{
+    memberList.push(memberData);
+    window.localStorage.setItem("memberList", JSON.stringify(memberList));
+    }
+    
     memberList.push(memberData);
     window.localStorage.setItem("memberList", JSON.stringify(memberList));
     
@@ -20,13 +27,12 @@ function createNewTeamMember(memberInfo){
 
 function renderWorkerList(){
 
-    const memberList = JSON.parse(window.localStorage.getItem("memberList")) || [];
-    const workerList = document.getElementById("worker-list");
+    let memberList = JSON.parse(window.localStorage.getItem("memberList")) || [];
+    let workerList = document.getElementById("worker-list");
     workerList.innerHTML = "";
         
-     
+    const workerEl = document.createElement("div"); 
     for(memberData of memberList){
-        const workerEl = document.createElement("div");
         
         workerEl.draggable = true;
         
@@ -194,6 +200,7 @@ function renderTaskAdderDiv(){
     }
 }
 renderTaskManager();
+renderWorkerList();
 
 
 
