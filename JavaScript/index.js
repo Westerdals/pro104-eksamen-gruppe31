@@ -140,7 +140,7 @@ function workerDrop(event){
 }
 
 function handleWorkerDrag(event){
-    let teamMemberName = event.target.querySelector("img").innerText;
+    let teamMemberName = event.target.querySelector("h4").innerText;
     event.dataTransfer.setData("text", teamMemberName);
 }
 
@@ -166,14 +166,14 @@ function renderTaskManager(){
                         <th>Reminder</th>
                     </tr>
                     <tr>
-                        <td></td>
-                        <td></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
                         <td>${startDate}</td>
                         <td>${dueDate}</td>
-                        <td id = "workersTableEl" ondragover="workDragOver(event)" ondrop="workerDrop(event)"></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td contenteditable="true" id="workersTableEl" ondragover="workDragOver(event)" ondrop="workerDrop(event)"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
                     </tr>
                 </table>`;
         tableList.appendChild(projectEl);
