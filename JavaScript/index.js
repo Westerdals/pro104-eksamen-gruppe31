@@ -35,6 +35,7 @@ function renderWorkerList(){
     for(memberData of memberList){
         const workerEl = document.createElement("div");
         workerEl.draggable = true;
+        workerEl.ondragstart = handleWorkerDrag;
         
         var {teamMemberName, jobTitle} = memberData;
         workerEl.style.border = "2px solid black";
@@ -42,7 +43,7 @@ function renderWorkerList(){
         workerEl.style.textAlign="center";
         workerEl.style.marginTop="2px";
         workerEl.style.backgroundColor="lightgreen";
-        workerEl.innerHTML = "<h4>" + teamMemberName + "</h4>" + "<p>" + jobTitle + "</p>";
+        workerEl.innerHTML = "<h4 id = teamMemberNameId>" + teamMemberName + "</h4>" + "<p>" + jobTitle + "</p>";
         workerList.appendChild(workerEl);
             
         }
@@ -57,8 +58,9 @@ function createNewProject(event){
     var projectName = document.querySelector("[id='projectNameInput']").value;
     var startDate = document.querySelector("[id='projectStartDateInput']").value;
     var dueDate = document.querySelector("[id='projectDueDateInput']").value;
+    var teamMemberName = document.querySelector("[id='workersTableEl']").value;
 
-    const projectData = {projectName,startDate,dueDate};
+    const projectData = {projectName, startDate, dueDate, teamMemberName};
 
 
     var projectList = JSON.parse(window.localStorage.getItem("projectList")) || [];
@@ -129,6 +131,19 @@ function removeTaskAdderDiv(){
 
 }
 
+function workDragOver(event){
+    event.preventDefault();
+}
+
+function workerDrop(event){
+    let teamMemberName = event.dataTransfer.getData("text");
+}
+
+function handleWorkerDrag(event){
+    let teamMemberName = event.target.querySelector("img").innerText;
+    event.dataTransfer.setData("text", teamMemberName);
+}
+
 function renderTaskManager(){
     let projectList = JSON.parse(window.localStorage.getItem("projectList")) || [];
     let tableList = document.getElementById("table-list");
@@ -136,7 +151,7 @@ function renderTaskManager(){
     const projectEl = document.createElement("div");
     tableList.innerHTML = "";
     for(const projectData of projectList){
-        var{projectName, startDate, dueDate} = projectData;
+        var{projectName, startDate, dueDate, teamMemberName} = projectData;
         projectEl.innerHTML +=
             `<h1 id="projectNameStyle">${projectName}</h1>
                 <table>
@@ -155,42 +170,7 @@ function renderTaskManager(){
                         <td></td>
                         <td>${startDate}</td>
                         <td>${dueDate}</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </table>`;
-        tableList.appendChild(projectEl);
-    }
-}
-function renderTaskAdderDiv(){
-    let projectList = JSON.parse(window.localStorage.getItem("projectList")) || [];
-    let tableList = document.getElementById("table-list");
-    
-    const projectEl = document.createElement("div");
-    tableList.innerHTML = "";
-    for(const projectData of projectList){
-        var{projectName, startDate, dueDate} = projectData;
-        projectEl.innerHTML +=
-            `<h1 id="projectNameStyle">${projectName}</h1>
-                <table>
-                    <tr>
-                        <th>Task</th>
-                        <th id="task-description">Task description</th>
-                        <th>Start date</th>
-                        <th>Due date</th>
-                        <th>Workers</th>
-                        <th>Priority</th>
-                        <th>Status</th>
-                        <th>Reminder</th>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>${startDate}</td>
-                        <td>${dueDate}</td>
-                        <td></td>
+                        <td id = "workersTableEl" ondragover="workDragOver(event)" ondrop="workerDrop(event)"></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -201,6 +181,7 @@ function renderTaskAdderDiv(){
 }
 renderTaskManager();
 renderWorkerList();
-
+workDragOver();
+handleWorkerDrag();
 
 
