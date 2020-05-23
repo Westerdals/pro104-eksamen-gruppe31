@@ -160,6 +160,7 @@ header{
 table{
     border-collapse: collapse;
     margin-bottom: 50px;
+    width: 995px;
 }
 th{
     border: 2px solid black;
@@ -172,6 +173,104 @@ td{
     border-collapse: collapse;
     height: 20px;
     width: 200px;
-    background-color: aqua;
+    background-color: ghostwhite;
     position: relative;
+}
+.dropdown{
+    position:absolute;
+    right: 0.1px;
+    top: 0px;
+    width: 123.5px;
+    height: 18.5px;
+    font-size: 10px;
+}
+
+.dropdown2{
+    position:absolute;
+    right: 0.1px;
+    top: 0px;
+    width: 121px;
+    height: 18.5px;
+    font-size: 10px;
+}
+
+
+.dropdown-btn{
+    width:100%;
+    height:100%;
+    background-color: lightgray;
+}
+
+.dropdown-btn h1{
+    position:relative;
+    text-align: center;
+    font-size: 15px;
+    
+}
+
+.dropdown-ul{
+    position:absolute;
+    margin:0;
+    padding: 0;
+    width:100%;
+    display:none;
+    font-size: 15px;
+    
+}
+
+
+.dropdown-ul li{
+    
+    list-style: none;
+    
+}
+
+
+.dropdown-ul li a{
+    
+    display:block;
+    padding:10px;
+    text-align: center;
+    text-decoration: none;
+    color:black;
+    border: 1px solid black;
+    
+    
+}
+
+#status-working{
+    background-color:aqua;
+}
+
+
+#status-stuck{
+    background-color: brown;
+}
+
+#status-done{
+    background-color:greenyellow;
+}
+
+#priority-urgent{
+    background-color: orangered;
+}
+
+#priority-medium{
+    background-color: mediumpurple;
+}
+
+#priority-low{
+    background-color:deepskyblue;
+}
+
+
+.dropdown-btn:hover + .dropdown-ul{
+    
+    display:block;
+    
+}
+
+.dropdown-ul:hover{
+    
+    display:block;
 }

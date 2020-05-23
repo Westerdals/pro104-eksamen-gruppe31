@@ -7,7 +7,7 @@ function createNewTeamMember(memberInfo){
 
     var memberData = {teamMemberName, jobTitle};
 
-    const memberList = JSON.parse(window.localStorage.getItem("memberList")) || [];
+    var memberList = JSON.parse(window.localStorage.getItem("memberList")) || [];
     
     if(teamMemberName.length === 0){
         alert("Please fill in worker name")
@@ -58,7 +58,7 @@ function createNewProject(event){
     var startDate = document.querySelector("[id='projectStartDateInput']").value;
     var dueDate = document.querySelector("[id='projectDueDateInput']").value;
 
-    const projectData = {projectName,startDate,dueDate};
+    var projectData = {projectName,startDate,dueDate};
     
     let projectList = JSON.parse(window.localStorage.getItem("projectList")) || [];
 
@@ -161,12 +161,32 @@ function renderTaskManager(){
                         <td>${startDate}</td>
                         <td>${dueDate}</td>
                         <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>
+                            <div class="dropdown">
+                                <div class="dropdown-btn" id="status-btn"><h1 id="status">No status</h1></div>
+                                    <ul class="dropdown-ul" id="status-ul">
+                                        <li><a href="#" id="status-working">Working on it</a></li>
+                                        <li><a href="#" id="status-stuck">Stuck</a></li>
+                                        <li><a href="#" id="status-done">Done</a></li>
+                                    </ul>
+                                </div>
+                        </td>
+                        <td>
+                            <div class="dropdown2">
+                                <div class="dropdown-btn" id="priority-btn"><h1>No priority</h1></div>
+                                <ul class="dropdown-ul" id="priority-ul">
+                                    <li><a href="#" id="priority-urgent">Urgent</a></li>
+                                    <li><a href="#" id="priority-medium">Medium</a></li>
+                                    <li><a href="#" id="priority-low">Low</a></li>
+                                </ul> 
+                            </div> 
+                        </td>
                         <td></td>
                     </tr>
                 </table>`;
         tableList.appendChild(projectEl);
+        changeStatus(event);
+        changePriority(event);
     }
 }
 function renderTaskAdderDiv(){
@@ -204,6 +224,59 @@ function renderTaskAdderDiv(){
         tableList.appendChild(projectEl);
     }
 }
+function changeStatus(event){
+            var statusBtn = document.getElementById("status-btn");
+        
+            var newStatus = document.querySelector(".dropdown");
+        
+            newStatus.addEventListener("click", changeStatus);
+            
+            var status = document.querySelector("[id='status']").value; 
+             
+
+            var clickedStatus = event.target.id;
+            
+            var existing = localStorage.getItem("projectList");
+            existing = existing ? existing.split(',') : [];
+
+            if (clickedStatus === "status-working"){
+                statusBtn.innerHTML = `<h1 id="status">Working on it</h1>`;
+                statusBtn.style.backgroundColor="aqua";
+                existing.push('status');
+                localStorage.setItem('projectList', JSON.stringify(existing));
+            }
+            if (clickedStatus === "status-stuck"){
+                statusBtn.innerHTML = `<h1>Stuck</h1>`;
+                statusBtn.style.backgroundColor="brown";
+            } 
+            if (clickedStatus === "status-done"){
+                statusBtn.innerHTML = `<h1>Done</h1>`;
+                statusBtn.style.backgroundColor="greenyellow";
+            }
+            
+        }
+function changePriority(event){
+        var priorityBtn = document.getElementById("priority-btn");
+        var newPriority = document.querySelector(".dropdown2");
+
+        newPriority.addEventListener("click", changePriority);
+        var clickedPriority = event.target.id;
+
+            if(clickedPriority === "priority-urgent"){
+                   priorityBtn.innerHTML = "<h1>Urgent</h1>";
+                   priorityBtn.style.backgroundColor = "orangered";
+               }
+               if(clickedPriority ==="priority-medium"){
+                   priorityBtn.innerHTML = "<h1>Medium</h1>";
+                   priorityBtn.style.backgroundColor= "mediumpurple";
+
+               }
+               if(clickedPriority === "priority-low"){
+                   priorityBtn.innerHTML = "<h1>Low</h1>";
+                   priorityBtn.style.backgroundColor = "deepskyblue";
+               }
+
+        }
 renderTaskManager();
 renderWorkerList();
 
