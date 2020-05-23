@@ -6,15 +6,15 @@
         <link rel="stylesheet" type="text/css" href="../CSS/main.css">
     </head>
     <body>
-        <div id = "container">
-            <header>
+            
                 <div id="headerEl">
-                   <img src = "../Images/iTask-logo.png" id = "headerImg">
+                   <img draggable="true" src = "../Images/iTask-logo.png" id = "headerImg">
                 </div>
-            </header>
+            
+        <div id = "container">
         
             
-            <div id = "project-adder">
+            <div class = "adders" id = "project-adder">
 
                 <h2 class = "subHeaders">New project</h2>
                 <form onsubmit="createNewProject(event)">
@@ -28,14 +28,16 @@
 
                 <p>Due date:</p>
                 <input type ="date" id="projectDueDateInput" class="inputs">
+                <input id = "workersTableEl">
                 </div>
+                    
                 <div id = "pBtn-div">
                     <button id="addProjectBtn" class="btns" type="submit">Add project</button>
                 </div>
             </form>
             </div>
 
-            <div id = "worker-adder">
+            <div class = "adders" id = "worker-adder">
                 <h2 class = "subHeaders">Add worker</h2>
                 <form onsubmit="createNewTeamMember(event)">
                  <div id = "wInputs-div">
@@ -51,7 +53,7 @@
                 </form>
             </div>
 
-            <div id="task-adder">
+            <div class = "adders" id="task-adder">
                 <!-- Denne brukes til å generere innhold for å lage tasks. 
                     Kan f.eks. gjøres usynlig som standard og gjøres synlig ved bruk av css i funksjonen som aktiverer og genererer innhold -->
             </div>
@@ -61,16 +63,15 @@
                 <button onclick="generateTaskAdderDiv('Project name 2')">Test2</button>
                 <button onclick="generateTaskAdderDiv('Project name 3')">Test3</button>
             </div>
+        <div id="worker-list-container">
+                <h3 class="worker-list-info">Drag and drop</h3>
+                <div id="worker-list"></div>        
+        </div>
         </div>
         <div id="table-list">
                 <h1 id="project-name"></h1>
-        </div>
-        
-        <div id="worker-list-container">
-            <h3 class="worker-list-info">Drag and drop</h3>
-            <div id="worker-list"></div>
-        </div>
-        
+            </div>
+                
         <footer>
             <p>Copyright &copy; <script>document.write(new Date().getFullYear());</script> iTask</p>
         </footer>
