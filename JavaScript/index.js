@@ -93,7 +93,6 @@ function addTaskToProject(taskInput){
     window.localStorage.setItem(taskListName, JSON.stringify(taskArray)); //sender oppdatert array tilbake til localstorage
 
     taskInput.target.reset();
-    renderTaskManager();
 }
 
 function generateTaskAdderDiv(projectName){
@@ -129,24 +128,21 @@ function generateTaskAdderDiv(projectName){
 
 function removeTaskAdderDiv(){
     document.getElementById("task-adder").style.display = "none";
-    renderTaskManager();
+
 }
 
-/*
 function workDragOver(event){
     event.preventDefault();
 }
-*/
 
 function workerDrop(event){
     let teamMemberName = event.dataTransfer.getData("text");
 }
-/*
+
 function handleWorkerDrag(event){
     let teamMemberName = event.target.querySelector("h4").innerText;
     event.dataTransfer.setData("text", teamMemberName);
 }
-*/
 
 function renderTaskManager(){
     let projectList = JSON.parse(window.localStorage.getItem("projectList")) || [];
@@ -154,30 +150,10 @@ function renderTaskManager(){
     
     const projectEl = document.createElement("div");
     tableList.innerHTML = "";
-    var projectTemp; //String som skal holde alle radene med tasks
-    for(const projectData of projectList){ //Denne loopen er ansvarlig for printing av prosjekter og tasks inne i hvert prosjekt
+    for(const projectData of projectList){
         var{projectName, startDate, dueDate, teamMemberName} = projectData;
-
-        var tasksTempString = "";
-
-        let taskList = JSON.parse(window.localStorage.getItem(`${projectName} TaskList`)) || [];
-        for(var i = 0;i<taskList.length;i++){ //Her produsers alle radene til en string som senere puttes inn i en tabell
-        tasksTempString += `
-        <tr>
-            <td>${taskList[i].taskName}</td>
-            <td>${taskList[i].taskDescription}</td>
-            <td>${taskList[i].taskStartDate}</td>
-            <td>${taskList[i].taskDueDate}</td>
-            <td id="workersTableEl" ondragover="workDragOver(event)" ondrop="workerDrop(event)"></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        `;}
-
-        //Selve tabellen produseres her
         projectEl.innerHTML +=
-            `<h1 id="projectNameStyle">${projectName}  <button onclick="generateTaskAdderDiv('${projectName}')">Add task</button></h1>
+            `<h1 id="projectNameStyle">${projectName}</h1>
                 <table>
                     <tr>
                         <th>Task</th>
@@ -189,19 +165,23 @@ function renderTaskManager(){
                         <th>Status</th>
                         <th>Reminder</th>
                     </tr>
-
-                    ${tasksTempString}
-        
-        </table>`;
+                    <tr>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td>${startDate}</td>
+                        <td>${dueDate}</td>
+                        <td contenteditable="true" id="workersTableEl" ondragover="workDragOver(event)" ondrop="workerDrop(event)"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                        <td contenteditable="true"></td>
+                    </tr>
+                </table>`;
         tableList.appendChild(projectEl);
-        }
+    }
 }
-/*
-function renderTasks(){
-        
-}
-*/
 renderTaskManager();
 renderWorkerList();
-//workDragOver();
-//handleWorkerDrag();
+workDragOver();
+handleWorkerDrag();
+
+
