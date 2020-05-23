@@ -10,7 +10,7 @@ function createNewTeamMember(memberInfo){
     const memberList = JSON.parse(window.localStorage.getItem("memberList")) || [];
     
     if(teamMemberName.length === 0){
-        alert("Please fill in member")
+        alert("Please fill in worker name")
     }else{
     memberList.push(memberData);
     window.localStorage.setItem("memberList", JSON.stringify(memberList));
@@ -59,11 +59,16 @@ function createNewProject(event){
     var dueDate = document.querySelector("[id='projectDueDateInput']").value;
 
     const projectData = {projectName,startDate,dueDate};
+    
+    let projectList = JSON.parse(window.localStorage.getItem("projectList")) || [];
 
-
-    var projectList = JSON.parse(window.localStorage.getItem("projectList")) || [];
+    if(projectName.length === 0){
+        alert("Please fill in project name");
+    }else{
     projectList.push(projectData);
     window.localStorage.setItem("projectList", JSON.stringify(projectList));
+    }
+    
     renderTaskManager();
 
     event.target.reset();
