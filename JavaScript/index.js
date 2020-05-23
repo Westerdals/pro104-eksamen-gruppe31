@@ -31,12 +31,12 @@ function renderWorkerList(){
     if (memberList == undefined){
         memberList = [];
     }
-     
+    
     for(memberData of memberList){
         const workerEl = document.createElement("div");
         workerEl.draggable = true;
-        workerEl.ondragstart = handleWorkerDrag;
-        
+        workerEl.ondragstart = "handleWorkerDrag(event)";
+        workerEl.id = "worker-El";
         var {teamMemberName, jobTitle} = memberData;
         workerEl.style.border = "2px solid black";
         workerEl.style.borderRadius="50%";
@@ -58,9 +58,9 @@ function createNewProject(event){
     var projectName = document.querySelector("[id='projectNameInput']").value;
     var startDate = document.querySelector("[id='projectStartDateInput']").value;
     var dueDate = document.querySelector("[id='projectDueDateInput']").value;
-    var teamMemberName = document.querySelector("[id='workersTableEl']").value;
+    var teamMemberNameEl = document.querySelector("[id='workersTableEl']").value;
 
-    const projectData = {projectName, startDate, dueDate, teamMemberName};
+    const projectData = {projectName, startDate, dueDate, teamMemberNameEl};
 
 
     var projectList = JSON.parse(window.localStorage.getItem("projectList")) || [];
@@ -128,20 +128,34 @@ function generateTaskAdderDiv(projectName){
 
 function removeTaskAdderDiv(){
     document.getElementById("task-adder").style.display = "none";
-
 }
 
 function workDragOver(event){
     event.preventDefault();
+    event.dataTransfer.dropEffect = 'copy';
 }
 
+
 function workerDrop(event){
-    let teamMemberName = event.dataTransfer.getData("text");
+    event.preventDefault();
+    let teamMemberNameEl = event.dataTransfer.getData("text");
+    addNameToTable(teamMemberNameEl);
+    //document.getElementById("teamMemberNameId");
+}
+
+//localStorage.setItem('myFavoriteSandwich', 'tasty');
+
+function addNameToTable (event){
+    let teamMemberNameEl = event.target.getElementsById("worker-El");
+    let projectList = JSON.parse(window.localStorage.getItem("projectList")) || [];
+    projectList.push(teamMemberNameEl);
+    window.localStorage.setItem("projectList", JSON.stringify(projectList));
+    renderTaskManager();
 }
 
 function handleWorkerDrag(event){
-    let teamMemberName = event.target.querySelector("h4").innerText;
-    event.dataTransfer.setData("text", teamMemberName);
+    let teamMemberNameEl = event.target.querySelector("h4").innerText;
+    event.dataTransfer.setData("text", teamMemberNameEl);
 }
 
 function renderTaskManager(){
@@ -151,7 +165,7 @@ function renderTaskManager(){
     const projectEl = document.createElement("div");
     tableList.innerHTML = "";
     for(const projectData of projectList){
-        var{projectName, startDate, dueDate, teamMemberName} = projectData;
+        var{projectName, startDate, dueDate, teamMemberNameEl} = projectData;
         projectEl.innerHTML +=
             `<h1 id="projectNameStyle">${projectName}</h1>
                 <table>
@@ -170,7 +184,7 @@ function renderTaskManager(){
                         <td contenteditable="true"></td>
                         <td>${startDate}</td>
                         <td>${dueDate}</td>
-                        <td contenteditable="true" id="workersTableEl" ondragover="workDragOver(event)" ondrop="workerDrop(event)"></td>
+                        <td id="workersTableEl" ondragover="workDragOver(event)" ondrop="workerDrop(event)"></td>
                         <td contenteditable="true"></td>
                         <td contenteditable="true"></td>
                         <td contenteditable="true"></td>
@@ -183,5 +197,7 @@ renderTaskManager();
 renderWorkerList();
 workDragOver();
 handleWorkerDrag();
+workerDrop();
 
 
+//
