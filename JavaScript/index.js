@@ -117,7 +117,14 @@ function generateTaskAdderDiv(projectName){
                         <input type ="date" id="taskDueDateInput" class="inputs">
 
                         <p>Priority:</p>
-                        <!-- fikse at dropdown og velging av riktig prioritet senere her -->
+                        <div class="dropdown">
+                                <div class="dropdown-btn" id="status-btn"><h1>No status</h1></div>
+                                    <ul class="dropdown-ul" id="status-ul">
+                                        <li><a href="#" id="status-working">Working on it</a></li>
+                                        <li><a href="#" id="status-stuck">Stuck</a></li>
+                                        <li><a href="#" id="status-done">Done</a></li>
+                                    </ul>
+                                </div>
 
                         <button id = "addTaskBtn" class = "btns" type="submit">Add task to project</button>
                     </div>
@@ -163,7 +170,7 @@ function renderTaskManager(){
                         <td></td>
                         <td>
                             <div class="dropdown">
-                                <div class="dropdown-btn" id="status-btn"><h1 id="status">No status</h1></div>
+                                <div class="dropdown-btn" id="status-btn"><h1 id="status">${status}</h1></div>
                                     <ul class="dropdown-ul" id="status-ul">
                                         <li><a href="#" id="status-working">Working on it</a></li>
                                         <li><a href="#" id="status-stuck">Stuck</a></li>
