@@ -189,7 +189,7 @@ td{
     position:absolute;
     right: 0.1px;
     top: 0px;
-    width: 121px;
+    width: 123.5px;
     height: 18.5px;
     font-size: 10px;
 }
@@ -215,6 +215,7 @@ td{
     width:100%;
     display:none;
     font-size: 15px;
+    z-index: 1;
     
 }
 
@@ -273,4 +274,14 @@ td{
 .dropdown-ul:hover{
     
     display:block;
+}
+#task-status{
+    position: absolute;
+    top: 273px;
+    left: 15px;
+}
+#task-priority{
+    position: absolute;
+    top: 237px;
+    left: 15px;
 }

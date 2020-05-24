@@ -121,10 +121,9 @@ function addTaskToProject(taskInput){
     var taskDescription = document.querySelector("[id='taskDescription']").value;
     var taskStartDate = document.querySelector("[id='taskStartDateInput']").value;
     var taskDueDate = document.querySelector("[id='taskDueDateInput']").value;
-    // var taskPriority = document.querySelector("[id='taskStartDateInput']").value;
-    //priority må fikses senere med dropdown meny
-
-    const taskData = {taskName,taskDescription,taskStartDate,taskDueDate};
+    var taskStatus = document.querySelector("[id='status-btn']").textContent;
+    var taskPriority = document.querySelector("[id='priority-btn']").textContent;
+    const taskData = {taskName,taskDescription,taskStartDate,taskDueDate,taskStatus,taskPriority};
 
     //Her bestemmes navn på listen over tasks. Må ta stilling til dette senere, enten prosjektnavn som vi passer som parameter eller noe annet unikt
     var taskListName = projectName + " " + "TaskList";
@@ -154,23 +153,33 @@ function generateTaskAdderDiv(projectName){
 
                         <p>Due date:</p>
                         <input type ="date" id="taskDueDateInput" class="inputs">
-
+                        
                         <p>Priority:</p>
-                        <div class="dropdown">
+                        <div class="dropdown2" id="task-priority">
+                                <div class="dropdown-btn" id="priority-btn"><h1>No priority</h1></div>
+                                <ul class="dropdown-ul" id="priority-ul">
+                                    <li><a href="#" id="priority-urgent">Urgent</a></li>
+                                    <li><a href="#" id="priority-medium">Medium</a></li>
+                                    <li><a href="#" id="priority-low">Low</a></li>
+                                </ul> 
+                            </div>
+                        <br>
+                        <p>Status:</p>
+                        <div class="dropdown" id="task-status">
                                 <div class="dropdown-btn" id="status-btn"><h1>No status</h1></div>
                                     <ul class="dropdown-ul" id="status-ul">
                                         <li><a href="#" id="status-working">Working on it</a></li>
                                         <li><a href="#" id="status-stuck">Stuck</a></li>
                                         <li><a href="#" id="status-done">Done</a></li>
                                     </ul>
-                                </div>
-
+                        </div>
+                        <br><br>
                         <button id = "addTaskBtn" class = "btns" type="submit">Add task to project</button>
+                        <button id = "addTaskBtnDone" class = "btns" onclick="removeTaskAdderDiv()">Done</button>
                     </div>
-                </form>
-                <button id = "addTaskBtnDone" class = "btns" onclick="removeTaskAdderDiv()">Done</button>
-                `;
-    
+                </form>`;
+    changeStatus(event);
+    changePriority(event);
     document.getElementById("project-name").style.display = "none";
     document.getElementById("task-adder").style.display = "inline";
 }
@@ -190,7 +199,7 @@ function renderTaskManager(){
         var{projectName, startDate, dueDate} = projectData;
 
         var tasksTempString = "";
-
+        
         let taskList = JSON.parse(window.localStorage.getItem(`${projectName} TaskList`)) || [];
         for(var i = 0;i<taskList.length;i++){ //Her produsers alle radene til en string som senere puttes inn i en tabell
         tasksTempString += `
@@ -201,18 +210,9 @@ function renderTaskManager(){
             <td>${taskList[i].taskDueDate}</td>
             <td id="task-worker" ondragover="handleDragover(event)" ondrop="handleOndrop(event)"></td>
                         <td>
-                            <div class="dropdown">
-                                <div class="dropdown-btn" id="status-btn"><h1 id="status">${status}</h1></div>
-                                    <ul class="dropdown-ul" id="status-ul">
-                                        <li><a href="#" id="status-working">Working on it</a></li>
-                                        <li><a href="#" id="status-stuck">Stuck</a></li>
-                                        <li><a href="#" id="status-done">Done</a></li>
-                                    </ul>
-                                </div>
-                        </td>
-                        <td>
                             <div class="dropdown2">
-                                <div class="dropdown-btn" id="priority-btn"><h1>No priority</h1></div>
+                                <div class="dropdown-btn" id="priority-btn">             <h1>${taskList[i].taskPriority}</h1>
+                                </div>
                                 <ul class="dropdown-ul" id="priority-ul">
                                     <li><a href="#" id="priority-urgent">Urgent</a></li>
                                     <li><a href="#" id="priority-medium">Medium</a></li>
@@ -220,9 +220,21 @@ function renderTaskManager(){
                                 </ul> 
                             </div> 
                         </td>
-                        <td></td>
-        </tr>
-        `;
+                        <td>
+                            <div class="dropdown">
+                                <div class="dropdown-btn" id="status-btn">
+                                    <h1>${taskList[i].taskStatus}</h1>
+                                </div>
+                                <ul class="dropdown-ul" id="status-ul">
+                                        <li><a href="#" id="status-working">Working on it</a></li>
+                                        <li><a href="#" id="status-stuck">Stuck</a></li>
+                                        <li><a href="#" id="status-done">Done</a></li>
+                                    </ul>
+                            </div>
+                        </td>
+                        <td>
+                        </td>
+        </tr>`
         }
         // Her produseres prosjekt-tabellen (template literal string med alle tilhørende radene settes inn også her via variabelen tasksTempString)
         projectEl.innerHTML +=
@@ -243,68 +255,22 @@ function renderTaskManager(){
 
                 </table>`;
         tableList.appendChild(projectEl);
-  //      changeStatus(event);
-  //      changePriority(event);
     }
 }
-/*
-function renderTaskAdderDiv(){
-    let projectList = JSON.parse(window.localStorage.getItem("projectList")) || [];
-    let tableList = document.getElementById("table-list");
-    
-    const projectEl = document.createElement("div");
-    tableList.innerHTML = "";
-    for(const projectData of projectList){
-        var{projectName, startDate, dueDate} = projectData;
-        projectEl.innerHTML +=
-            `<h1 id="projectNameStyle">${projectName}</h1>
-                <table>
-                    <tr>
-                        <th>Task</th>
-                        <th id="task-description">Task description</th>
-                        <th>Start date</th>
-                        <th>Due date</th>
-                        <th>Workers</th>
-                        <th>Priority</th>
-                        <th>Status</th>
-                        <th>Reminder</th>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>${startDate}</td>
-                        <td>${dueDate}</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </table>`;
-        tableList.appendChild(projectEl);
-    }
-}
-*/
-/*
+
 function changeStatus(event){
             var statusBtn = document.getElementById("status-btn");
         
             var newStatus = document.querySelector(".dropdown");
         
             newStatus.addEventListener("click", changeStatus);
-            
-            var status = document.querySelector("[id='status']").value; 
-             
 
             var clickedStatus = event.target.id;
             
-            var existing = localStorage.getItem("projectList");
-            existing = existing ? existing.split(',') : [];
 
             if (clickedStatus === "status-working"){
-                statusBtn.innerHTML = `<h1 id="status">Working on it</h1>`;
+                statusBtn.innerHTML = `<h1>Working on it</h1>`;
                 statusBtn.style.backgroundColor="aqua";
-                existing.push('status');
-                localStorage.setItem('projectList', JSON.stringify(existing));
             }
             if (clickedStatus === "status-stuck"){
                 statusBtn.innerHTML = `<h1>Stuck</h1>`;
@@ -316,8 +282,7 @@ function changeStatus(event){
             }
             
         }
-*/
-       /*
+       
 function changePriority(event){
         var priorityBtn = document.getElementById("priority-btn");
         var newPriority = document.querySelector(".dropdown2");
@@ -340,6 +305,5 @@ function changePriority(event){
                }
 
         }
-*/
 renderWorkerList();
 renderTaskManager();
