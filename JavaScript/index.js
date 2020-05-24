@@ -178,7 +178,7 @@ function generateTaskAdderDiv(projectName){
                         <button id = "addTaskBtnDone" class = "btns" onclick="removeTaskAdderDiv()">Done</button>
                     </div>
                 </form>`;
-    changeStatus(event);
+    changeStatus();
     changePriority(event);
     document.getElementById("project-name").style.display = "none";
     document.getElementById("task-adder").style.display = "inline";
@@ -235,6 +235,7 @@ function renderTaskManager(){
                         <td>
                         </td>
         </tr>`
+        
         }
         // Her produseres prosjekt-tabellen (template literal string med alle tilhørende radene settes inn også her via variabelen tasksTempString)
         projectEl.innerHTML +=
@@ -258,7 +259,7 @@ function renderTaskManager(){
     }
 }
 
-function changeStatus(event){
+function changeStatus(){
             var statusBtn = document.getElementById("status-btn");
         
             var newStatus = document.querySelector(".dropdown");
