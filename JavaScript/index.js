@@ -19,6 +19,8 @@ function createNewTeamMember(memberInfo){
     renderWorkerList();
 
     memberInfo.target.reset();
+    
+   
 
 }
 
@@ -35,10 +37,12 @@ function renderWorkerList(){
     for(memberData of memberList){
         const workerEl = document.createElement("div");
         workerEl.draggable = true;
+        workerEl.ondragstart = handleOndragstart;
         
         var {teamMemberName, jobTitle} = memberData;
         workerEl.style.border = "2px solid black";
-        workerEl.style.borderRadius="50%";
+        workerEl.style.borderRadius="30%";
+        workerEl.style.padding = "5px";
         workerEl.style.textAlign="center";
         workerEl.style.marginTop="2px";
         workerEl.style.backgroundColor="lightgreen";
@@ -46,9 +50,43 @@ function renderWorkerList(){
         workerList.appendChild(workerEl);
             
         }
-        
-        
+      
     }
+
+function handleOndragstart(event){
+    
+    var teamMemberNameEl = event.target.querySelector("h4").innerText;
+    event.dataTransfer.setData("text/plain", teamMemberNameEl);
+    
+}
+
+
+function handleDragover(event){
+    event.preventDefault();
+    event.dataTransfer.dropEffect = "copy";
+    
+}
+
+function handleOndrop(event){
+    
+    var teamMemberNameEl = event.dataTransfer.getData("text/plain");
+    console.log("handleOnDrop", teamMemberNameEl);
+    handleDragDropWorker(teamMemberNameEl);
+}
+
+function handleDragDropWorker(teamMemberNameEl){
+    
+    let projectList = JSON.parse(window.localStorage.getItem("projectList")) || [];
+    var taskWorker = document.querySelector("[id='task-worker']");
+    
+    taskWorker.innerText = teamMemberNameEl;
+    
+    projectList = projectList ? projectList.split(','):[];
+    
+    projectList.push(teamMemberNameEl);
+    window.localStorage.setItem("projectList", projectList.toString());
+    
+}
     
 
 function createNewProject(event){
@@ -57,7 +95,7 @@ function createNewProject(event){
     var projectName = document.querySelector("[id='projectNameInput']").value;
     var startDate = document.querySelector("[id='projectStartDateInput']").value;
     var dueDate = document.querySelector("[id='projectDueDateInput']").value;
-
+    
     var projectData = {projectName,startDate,dueDate};
     
     let projectList = JSON.parse(window.localStorage.getItem("projectList")) || [];
@@ -160,7 +198,7 @@ function renderTaskManager(){
                         <td></td>
                         <td>${startDate}</td>
                         <td>${dueDate}</td>
-                        <td></td>
+                        <td id="task-worker" ondragover="handleDragover(event)" ondrop="handleOndrop(event)"></td>
                         <td>
                             <div class="dropdown">
                                 <div class="dropdown-btn" id="status-btn"><h1 id="status">No status</h1></div>
@@ -277,8 +315,8 @@ function changePriority(event){
                }
 
         }
-renderTaskManager();
-renderWorkerList();
 
+renderWorkerList();
+renderTaskManager();
 
 
