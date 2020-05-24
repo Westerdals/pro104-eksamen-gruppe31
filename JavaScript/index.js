@@ -134,6 +134,7 @@ function addTaskToProject(taskInput){
     window.localStorage.setItem(taskListName, JSON.stringify(taskArray)); //sender oppdatert array tilbake til localstorage
 
     taskInput.target.reset();
+    renderTaskManager();
 }
 
 function generateTaskAdderDiv(projectName){
@@ -180,25 +181,18 @@ function renderTaskManager(){
     tableList.innerHTML = "";
     for(const projectData of projectList){
         var{projectName, startDate, dueDate} = projectData;
-        projectEl.innerHTML +=
-            `<h1 id="projectNameStyle">${projectName}</h1>
-                <table>
-                    <tr>
-                        <th>Task</th>
-                        <th id="task-description">Task description</th>
-                        <th>Start date</th>
-                        <th>Due date</th>
-                        <th>Workers</th>
-                        <th>Priority</th>
-                        <th>Status</th>
-                        <th>Reminder</th>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>${startDate}</td>
-                        <td>${dueDate}</td>
-                        <td id="task-worker" ondragover="handleDragover(event)" ondrop="handleOndrop(event)"></td>
+
+        var tasksTempString = "";
+
+        let taskList = JSON.parse(window.localStorage.getItem(`${projectName} TaskList`)) || [];
+        for(var i = 0;i<taskList.length;i++){ //Her produsers alle radene til en string som senere puttes inn i en tabell
+        tasksTempString += `
+        <tr>
+            <td>${taskList[i].taskName}</td>
+            <td>${taskList[i].taskDescription}</td>
+            <td>${taskList[i].taskStartDate}</td>
+            <td>${taskList[i].taskDueDate}</td>
+            <td id="task-worker" ondragover="handleDragover(event)" ondrop="handleOndrop(event)"></td>
                         <td>
                             <div class="dropdown">
                                 <div class="dropdown-btn" id="status-btn"><h1 id="status">No status</h1></div>
@@ -220,13 +214,33 @@ function renderTaskManager(){
                             </div> 
                         </td>
                         <td></td>
+        </tr>
+        `;
+        }
+        // Her produseres prosjekt-tabellen (template literal string med alle tilhørende radene settes inn også her via variabelen tasksTempString)
+        projectEl.innerHTML +=
+            `<h1 id="projectNameStyle">${projectName}  <button onclick="generateTaskAdderDiv('${projectName}')">Add task</button></h1>
+                <table>
+                    <tr>
+                        <th>Task</th>
+                        <th id="task-description">Task description</th>
+                        <th>Start date</th>
+                        <th>Due date</th>
+                        <th>Workers</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                        <th>Reminder</th>
                     </tr>
+
+                    ${tasksTempString}
+
                 </table>`;
         tableList.appendChild(projectEl);
-        changeStatus(event);
-        changePriority(event);
+  //      changeStatus(event);
+  //      changePriority(event);
     }
 }
+/*
 function renderTaskAdderDiv(){
     let projectList = JSON.parse(window.localStorage.getItem("projectList")) || [];
     let tableList = document.getElementById("table-list");
@@ -262,6 +276,8 @@ function renderTaskAdderDiv(){
         tableList.appendChild(projectEl);
     }
 }
+*/
+/*
 function changeStatus(event){
             var statusBtn = document.getElementById("status-btn");
         
@@ -293,6 +309,8 @@ function changeStatus(event){
             }
             
         }
+*/
+       /*
 function changePriority(event){
         var priorityBtn = document.getElementById("priority-btn");
         var newPriority = document.querySelector(".dropdown2");
@@ -315,8 +333,6 @@ function changePriority(event){
                }
 
         }
-
+*/
 renderWorkerList();
 renderTaskManager();
-
-
