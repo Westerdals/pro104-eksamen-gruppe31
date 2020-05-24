@@ -123,7 +123,8 @@ function addTaskToProject(taskInput){
     var taskDueDate = document.querySelector("[id='taskDueDateInput']").value;
     var taskStatus = document.querySelector("[id='status-btn']").textContent;
     var taskPriority = document.querySelector("[id='priority-btn']").textContent;
-    const taskData = {taskName,taskDescription,taskStartDate,taskDueDate,taskStatus,taskPriority};
+    var taskId = taskIdCounter;
+    const taskData = {taskName,taskDescription,taskStartDate,taskDueDate,taskStatus,taskPriority,taskId};
 
     //Her bestemmes navn på listen over tasks. Må ta stilling til dette senere, enten prosjektnavn som vi passer som parameter eller noe annet unikt
     var taskListName = projectName + " " + "TaskList";
@@ -134,6 +135,7 @@ function addTaskToProject(taskInput){
 
     taskInput.target.reset();
     renderTaskManager();
+    taskIdCounter++;
 }
 
 function generateTaskAdderDiv(projectName){
@@ -184,10 +186,24 @@ function generateTaskAdderDiv(projectName){
     document.getElementById("task-adder").style.display = "inline";
 }
 
+function updatePriorityInLocalStorage(newPriority,projectName,taskNumber){
+    let selectedProjectTaskList = JSON.parse(window.localStorage.getItem(`${projectName} TaskList`));
+    console.log(newPriority, projectName, taskNumber);
+    for(var i=0;i<selectedProjectTaskList.length;i++){
+        if(taskNumber == selectedProjectTaskList[i].taskId){
+            selectedProjectTaskList[i].taskPriority = newPriority;
+        }
+    }
+    window.localStorage.setItem(`${projectName} TaskList`, JSON.stringify(selectedProjectTaskList));
+    renderTaskManager();
+}
+
 function removeTaskAdderDiv(){
     document.getElementById("task-adder").style.display = "none";
 
 }
+
+let taskIdCounter = 1;
 
 function renderTaskManager(){
     let projectList = JSON.parse(window.localStorage.getItem("projectList")) || [];
@@ -214,9 +230,9 @@ function renderTaskManager(){
                                 <div class="dropdown-btn" id="priority-btn">             <h1>${taskList[i].taskPriority}</h1>
                                 </div>
                                 <ul class="dropdown-ul" id="priority-ul">
-                                    <li><a href="#" id="priority-urgent">Urgent</a></li>
-                                    <li><a href="#" id="priority-medium">Medium</a></li>
-                                    <li><a href="#" id="priority-low">Low</a></li>
+                                    <li><a href="javascript:updatePriorityInLocalStorage('Urgent', '${projectName}', '${taskList[i].taskId}');" id="priority-urgent">Urgent</a></li>
+                                    <li><a href="javascript:updatePriorityInLocalStorage('Medium', '${projectName}', '${taskList[i].taskId}');" id="priority-medium">Medium</a></li>
+                                    <li><a href="javascript:updatePriorityInLocalStorage('Low', '${projectName}', '${taskList[i].taskId}');" id="priority-low">Low</a></li>
                                 </ul> 
                             </div> 
                         </td>
