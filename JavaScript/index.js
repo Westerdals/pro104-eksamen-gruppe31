@@ -68,23 +68,23 @@ function handleDragover(event){
 }
 
 function handleOndrop(event){
-    
+    var taskListId = event.path[0].id;
     var teamMemberNameEl = event.dataTransfer.getData("text/plain");
     console.log("handleOnDrop", teamMemberNameEl);
-    handleDragDropWorker(teamMemberNameEl);
+    handleDragDropWorker(teamMemberNameEl, taskListId);
 }
 
-function handleDragDropWorker(teamMemberNameEl){
+function handleDragDropWorker(teamMemberNameEl, taskListId){
+    let projectAndPosition = taskListId.split("-");
+    let taskList = JSON.parse(window.localStorage.getItem(projectAndPosition[0] + " TaskList")) || [];
+    var taskWorker = document.querySelector("[id='"+ taskListId +"']");
     
-    let projectList = JSON.parse(window.localStorage.getItem("projectList")) || [];
-    var taskWorker = document.querySelector("[id='task-worker']");
-    
-    taskWorker.innerText = teamMemberNameEl;
-    
-    projectList = projectList ? projectList.split(','):[];
-    
-    projectList.push(teamMemberNameEl);
-    window.localStorage.setItem("projectList", projectList.toString());
+    let taskPosition = parseInt(projectAndPosition[1]);
+    let workerString = taskList[taskPosition].taskWorker ? taskList[taskPosition].taskWorker + ', ' + teamMemberNameEl : teamMemberNameEl;
+    taskWorker.innerText = workerString;
+    // this is a ternary operator
+    taskList[taskPosition].taskWorker = workerString;
+    window.localStorage.setItem(projectAndPosition[0] + " TaskList", JSON.stringify(taskList));
     
 }
     
@@ -224,7 +224,7 @@ function renderTaskManager(){
             <td>${taskList[i].taskDescription}</td>
             <td>${taskList[i].taskStartDate}</td>
             <td>${taskList[i].taskDueDate}</td>
-            <td id="task-worker" ondragover="handleDragover(event)" ondrop="handleOndrop(event)"></td>
+            <td id="${projectName}-${[i]}" ondragover="handleDragover(event)" ondrop="handleOndrop(event)">${taskList[i].taskWorker}</td>
                         <td>
                             <div class="dropdown2">
                                 <div class="dropdown-btn" id="priority-btn">             <h1>${taskList[i].taskPriority}</h1>
