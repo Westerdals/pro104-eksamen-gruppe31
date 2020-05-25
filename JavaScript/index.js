@@ -157,6 +157,11 @@ function generateTaskAdderDiv(projectName){
                         <input type ="date" id="taskDueDateInput" class="inputs">
                         
                         <p>Priority:</p>
+<<<<<<< HEAD
+                        <!-- fikse at dropdown og velging av riktig prioritet senere her -->
+                        <br>
+                        <br>
+=======
                         <div class="dropdown2" id="task-priority">
                                 <div class="dropdown-btn" id="priority-btn"><h1>No priority</h1></div>
                                 <ul class="dropdown-ul" id="priority-ul">
@@ -176,6 +181,7 @@ function generateTaskAdderDiv(projectName){
                                     </ul>
                         </div>
                         <br><br>
+>>>>>>> c2eb82c79867e67023d052bece38dc0e7bb0dcdf
                         <button id = "addTaskBtn" class = "btns" type="submit">Add task to project</button>
                         <button id = "addTaskBtnDone" class = "btns" onclick="removeTaskAdderDiv()">Done</button>
                     </div>

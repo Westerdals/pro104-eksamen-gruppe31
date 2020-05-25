@@ -16,10 +16,13 @@
                 </div>
             
         <div id = "container">
-        
+
+            <div id="headerEl">
+                <img draggable="true" src = "../Images/iTask-logo.png" id = "headerImg">
+             </div>
             
             <div class = "adders" id = "project-adder">
-
+                <br>
                 <h2 class = "subHeaders">New project</h2>
                 <form onsubmit="createNewProject(event)">
                 <div id = "pInputs-div">
@@ -42,6 +45,7 @@
             </div>
 
             <div class = "adders" id = "worker-adder">
+                <br>
                 <h2 class = "subHeaders">Add worker</h2>
                 <form onsubmit="createNewTeamMember(event)">
                  <div id = "wInputs-div">
@@ -71,9 +75,11 @@
                 <h1 id="project-name"></h1>
             </div>
                 
-        <footer>
+    <!--    <footer>
             <p>Copyright &copy; <script>document.write(new Date().getFullYear());</script> iTask</p>
         </footer>
+
+        -->
     </body>
     <script src="../JavaScript/index.js"></script>
 </html>
