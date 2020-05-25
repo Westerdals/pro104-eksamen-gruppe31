@@ -1,5 +1,16 @@
-let taskIdCounter = 1;
-//LAGE EN FUNKSJON SOM HENTER COUNTER FRA LOCALSTORAGE FOR Å UNNGÅ BUGS
+//Henter counter til task-id fra localStorage for å unngå at flere får samme ved reload av side
+function initializeTaskIdCounter(){
+    let taskIdCounter = JSON.parse(window.localStorage.getItem("taskIdCounter")) || 1;
+    window.localStorage.setItem("taskIdCounter", JSON.stringify(taskIdCounter));
+}
+
+initializeTaskIdCounter();
+
+function incrementTaskIdCounter(){
+    let taskIdCounter = JSON.parse(window.localStorage.getItem("taskIdCounter"));
+    taskIdCounter++;
+    window.localStorage.setItem("taskIdCounter", JSON.stringify(taskIdCounter));
+}
 
 function createNewTeamMember(memberInfo){
     memberInfo.preventDefault();
@@ -124,7 +135,7 @@ function addTaskToProject(){
     var taskDueDate = document.querySelector("[id='taskDueDateInput']").value;
     var taskStatus = document.querySelector("[id='status-btn']").textContent;
     var taskPriority = document.querySelector("[id='priority-btn']").textContent;
-    var taskId = taskIdCounter;
+    var taskId = JSON.parse(window.localStorage.getItem("taskIdCounter"));
 
     if(taskName.trim() == ""){
         alert("Please fill in task name");
@@ -151,7 +162,7 @@ function addTaskToProject(){
     document.querySelector("[id='priority-btn']").innerHTML = "<h1>No priority</h1>";
 
     renderTaskManager();
-    taskIdCounter++;
+    incrementTaskIdCounter();
 }
 
 function generateEditTaskDiv(projectName, taskNumber){
@@ -369,7 +380,7 @@ function renderTaskManager(){
         }
         // Her produseres prosjekt-tabellen (template literal string med alle tilhørende radene settes inn også her via variabelen tasksTempString)
         projectEl.innerHTML +=
-            `<h1 id="projectNameStyle">${projectName} (${startDate}, ${dueDate})  <button onclick="generateTaskAdderDiv('${projectName}')">Add task</button></h1>
+            `<h1 id="projectNameStyle">${projectName} (${startDate}, ${dueDate})  <button onclick="generateTaskAdderDiv('${projectName}')">Add task</button> <button onclick="deleteProject('${projectName}')"> Delete project</button></h1>
                 <table>
                     <tr>
                         <th>Task</th>
@@ -380,7 +391,7 @@ function renderTaskManager(){
                         <th>Priority</th>
                         <th>Status</th>
                         <th>Reminder</th>
-                        <th>Remove Task</th>
+                        <th>Tools</th>
                     </tr>
 
                     ${tasksTempString}
@@ -388,6 +399,26 @@ function renderTaskManager(){
                 </table>`;
         tableList.appendChild(projectEl);
     }
+}
+
+function deleteProject(projectName){
+    var bekreftSletting = prompt("Er du sikker? Prosjektet og alle tasks vil gå tapt. Skriv ja for å fullføre sletting av prosjekt.").toLowerCase();
+    console.log(bekreftSletting);
+
+    var projectList = JSON.parse(window.localStorage.getItem("projectList"));
+
+    console.log(projectList);
+
+    if(bekreftSletting == "ja"){
+        for(var i = 0;i<projectList.length;i++){
+            if(projectList[i].projectName == projectName){
+                projectList.splice([i], 1);
+            }
+        }
+        window.localStorage.removeItem(`${projectName} TaskList`);
+    }
+    window.localStorage.setItem("projectList", JSON.stringify(projectList));
+    renderTaskManager();
 }
 
 function removeSelectedTask(projectName, taskNumber){
