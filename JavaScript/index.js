@@ -1,4 +1,5 @@
 let taskIdCounter = 1;
+//LAGE EN FUNKSJON SOM HENTER COUNTER FRA LOCALSTORAGE FOR Å UNNGÅ BUGS
 
 function createNewTeamMember(memberInfo){
     memberInfo.preventDefault();
