@@ -80,9 +80,9 @@ function handleDragDropWorker(teamMemberNameEl, taskListId){
     var taskWorker = document.querySelector("[id='"+ taskListId +"']");
     
     let taskPosition = parseInt(projectAndPosition[1]);
+    // this is a ternary operator
     let workerString = taskList[taskPosition].taskWorker ? taskList[taskPosition].taskWorker + ', ' + teamMemberNameEl : teamMemberNameEl;
     taskWorker.innerText = workerString;
-    // this is a ternary operator
     taskList[taskPosition].taskWorker = workerString;
     window.localStorage.setItem(projectAndPosition[0] + " TaskList", JSON.stringify(taskList));
     
