@@ -11,10 +11,14 @@
     </head>
     <body>
         <div id = "container">
-            <div id="headerEl">
-                <img draggable="true" src = "../Images/iTask-logo.png" id = "headerImg">
-            </div>
-            <div class = "adders" id = "project-adder">
+            <header>
+                <div id="header-div">
+                    <img draggable="true" src = "../Images/iTask-logo.png" id = "headerImg">
+                </div>
+            </header>
+        <main id = "grid-container">
+            <div id = "menu-div">
+                <div class = "adders" id = "project-adder">
                 <br>
                 <h2 class = "subHeaders">New project</h2>
                 <form onsubmit="createNewProject(event)">
@@ -48,32 +52,31 @@
                  <p>Title:</p>
                   <input type = "text" id = "workerTitle" class = "inputs">
                  </div>
-                <div id = "wBtn-div">
+                    <div id = "wBtn-div">
                     <button id = "addWorkerBtn" class = "btns" type="submit">Add worker</button>
-                </div>
+                    </div>
                 </form>
             </div>
-
-            <div class = "adders" id="task-adder">
+                <div class = "adders" id="task-adder">
                 <!-- Denne brukes til å generere innhold for å lage tasks. 
                     Kan f.eks. gjøres usynlig som standard og gjøres synlig ved bruk av css i funksjonen som aktiverer og genererer innhold -->
-            </div>
-            
-        <div id="worker-list-container">
-                <h3 class="worker-list-info">Drag and drop</h3>
-                <div id="worker-list"></div>
-                <button onclick = "removeAllWorkers()" id="remove-worker">Clear all</button>
-        </div>
-        </div>
-        <div id="table-list">
-                <h1 id="project-name"></h1>
+                </div>
             </div>
                 
-    <!--    <footer>
-            <p>Copyright &copy; <script>document.write(new Date().getFullYear());</script> iTask</p>
-        </footer>
-
-        -->
+            <div id="worker-list-container">
+            <h3 class="worker-list-info">Drag and drop</h3>
+                <div id="worker-list"></div>        
+                <button onclick = "removeAllWorkers()" id="remove-worker">Clear all</button>
+            </div>
+            <div id="table-list">
+                <h1 id="project-name"></h1>
+            </div>
+        </main>
+            <footer>
+                <p>Copyright &copy; <script>document.write(new Date().getFullYear());</script> iTask</p>
+            </footer>
+            
+        </div>
     </body>
     <script src="../JavaScript/index.js"></script>
 </html>
