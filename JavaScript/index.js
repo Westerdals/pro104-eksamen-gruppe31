@@ -159,11 +159,6 @@ function generateTaskAdderDiv(projectName){
                         <input type ="date" id="taskDueDateInput" class="inputs">
                         
                         <p>Priority:</p>
-<<<<<<< HEAD
-                        <!-- fikse at dropdown og velging av riktig prioritet senere her -->
-                        <br>
-                        <br>
-=======
                         <div class="dropdown2" id="task-priority">
                                 <div class="dropdown-btn" id="priority-btn"><h1>No priority</h1></div>
                                 <ul class="dropdown-ul" id="priority-ul">
@@ -183,7 +178,6 @@ function generateTaskAdderDiv(projectName){
                                     </ul>
                         </div>
                         <br><br>
->>>>>>> c2eb82c79867e67023d052bece38dc0e7bb0dcdf
                         <button id = "addTaskBtn" class = "btns" type="submit">Add task to project</button>
                         <button id = "addTaskBtnDone" class = "btns" onclick="removeTaskAdderDiv()">Done</button>
                     </div>
@@ -242,19 +236,19 @@ function renderTaskManager(){
             <td>${taskList[i].taskDueDate}</td>
             <td id="${projectName}-${[i]}" ondragover="handleDragover(event)" ondrop="handleOndrop(event)">${taskList[i].taskWorker}</td>
                         <td>
-                            <div class="dropdown2">
+                            <div class="dropdown2-table-row">
                                 <div class="dropdown-btn" id="priority-btn">
                                 <h1 class='priority-${taskList[i].taskPriority}'>${taskList[i].taskPriority}</h1>
                                 </div>
                                 <ul class="dropdown-ul" id="priority-ul">
-                                    <li><a href="javascript:updatePriorityInLocalStorage('Urgent', '${projectName}', '${taskList[i].taskId}');" id="priority-urgent">Urgent</a></li>
-                                    <li><a href="javascript:updatePriorityInLocalStorage('Medium', '${projectName}', '${taskList[i].taskId}');" id="priority-medium">Medium</a></li>
-                                    <li><a href="javascript:updatePriorityInLocalStorage('Low', '${projectName}', '${taskList[i].taskId}');" id="priority-low">Low</a></li>
+                                    <li><a href="javascript:updatePriorityInLocalStorage('Urgent', '${projectName}', '${taskList[i].taskId}');" class="priority-urgent-row-li">Urgent</a></li>
+                                    <li><a href="javascript:updatePriorityInLocalStorage('Medium', '${projectName}', '${taskList[i].taskId}');" class="priority-medium-row-li">Medium</a></li>
+                                    <li><a href="javascript:updatePriorityInLocalStorage('Low', '${projectName}', '${taskList[i].taskId}');" class="priority-low-row-li">Low</a></li>
                                 </ul> 
                             </div> 
                         </td>
                         <td>
-                            <div class="dropdown">
+                            <div class="dropdown-table-row">
                                 <div class="dropdown-btn" id="status-btn">
                                     <h1 class='status-${taskList[i].taskStatus}'>${taskList[i].taskStatus}</h1>
                                 </div>
