@@ -39,7 +39,7 @@ body {
 
 #task-adder{
     display: none;
-    height: 350px;
+    height: auto;
     width: 200px;
     left: 230px;
     top: 380px;
@@ -195,6 +195,7 @@ td{
     width: 200px;
     background-color: ghostwhite;
     position: relative;
+    text-align: center;
 }
 .dropdown{
     position:absolute;

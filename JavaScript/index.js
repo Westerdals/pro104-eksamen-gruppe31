@@ -114,9 +114,9 @@ function createNewProject(event){
     event.target.reset();
 }
 
-function addTaskToProject(taskInput){ 
+function addTaskToProject(){ 
     //Man kan her evt sende inn projectName som parameter for å lage egen liste med unikt navn til prosjektets tasks
-    taskInput.preventDefault();
+    //taskInput.preventDefault();
 
     var projectName = document.querySelector("[id='project-name']").innerHTML;
     var taskName = document.querySelector("[id='taskName']").value;
@@ -126,6 +126,12 @@ function addTaskToProject(taskInput){
     var taskStatus = document.querySelector("[id='status-btn']").textContent;
     var taskPriority = document.querySelector("[id='priority-btn']").textContent;
     var taskId = taskIdCounter;
+
+    if(taskName.trim() == ""){
+        alert("Please fill in task name");
+        return;
+    }
+
     const taskData = {taskName,taskDescription,taskStartDate,taskDueDate,taskStatus,taskPriority,taskId};
 
     //Her bestemmes navn på listen over tasks. Må ta stilling til dette senere, enten prosjektnavn som vi passer som parameter eller noe annet unikt
@@ -135,7 +141,16 @@ function addTaskToProject(taskInput){
     taskArray.push(taskData); //pusher ny data inn i array
     window.localStorage.setItem(taskListName, JSON.stringify(taskArray)); //sender oppdatert array tilbake til localstorage
 
-    taskInput.target.reset();
+
+    document.querySelector("[id='taskName']").value = "";
+    document.querySelector("[id='taskDescription']").value = "";
+    document.querySelector("[id='taskStartDateInput']").value = "";
+    document.querySelector("[id='taskDueDateInput']").value = "";
+    document.querySelector("[id='status-btn']").setAttribute('style', 'backgroundColor: lightgray');
+    document.querySelector("[id='status-btn']").innerHTML = "<h1>No status</h1>"
+    document.querySelector("[id='priority-btn']").setAttribute('style', 'backgroundColor: lightgray');
+    document.querySelector("[id='priority-btn']").innerHTML = "<h1>No priority</h1>";
+
     renderTaskManager();
     taskIdCounter++;
 }
@@ -143,7 +158,6 @@ function addTaskToProject(taskInput){
 function generateTaskAdderDiv(projectName){
     document.getElementById("task-adder").innerHTML = `
     <h2 class="subHeaders">Add task</h2>
-                <form onsubmit="addTaskToProject(event)">
                     <div id="tInputs-div">
                         <p id="project-name">${projectName}</p>
                         <p>Task name:</p>
@@ -178,10 +192,10 @@ function generateTaskAdderDiv(projectName){
                                     </ul>
                         </div>
                         <br><br>
-                        <button id = "addTaskBtn" class = "btns" type="submit">Add task to project</button>
+                        <button id = "addTaskBtn" class = "btns" onclick="addTaskToProject()">Add task to project</button>
                         <button id = "addTaskBtnDone" class = "btns" onclick="removeTaskAdderDiv()">Done</button>
                     </div>
-                </form>`;
+                `;
     changeStatus();
     changePriority(event);
     document.getElementById("project-name").style.display = "none";
