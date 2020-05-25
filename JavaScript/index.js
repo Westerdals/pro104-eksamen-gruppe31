@@ -1,6 +1,4 @@
 let taskIdCounter = 1;
-let statusIdCounter = 1;
-
 
 function createNewTeamMember(memberInfo){
     memberInfo.preventDefault();
@@ -141,7 +139,7 @@ function addTaskToProject(){
     taskArray.push(taskData); //pusher ny data inn i array
     window.localStorage.setItem(taskListName, JSON.stringify(taskArray)); //sender oppdatert array tilbake til localstorage
 
-
+    // Fjerner her innholdet i input-fields manuelt grunnet trøbbel med form og flere knapper (alle fungerer som submit)
     document.querySelector("[id='taskName']").value = "";
     document.querySelector("[id='taskDescription']").value = "";
     document.querySelector("[id='taskStartDateInput']").value = "";
@@ -153,6 +151,92 @@ function addTaskToProject(){
 
     renderTaskManager();
     taskIdCounter++;
+}
+
+function generateEditTaskDiv(projectName, taskNumber){
+    let selectedProjectTaskList = JSON.parse(window.localStorage.getItem(`${projectName} TaskList`));
+    for(let i = 0;i<selectedProjectTaskList.length;i++){
+        if(taskNumber == selectedProjectTaskList[i].taskId){
+            document.getElementById("task-adder").innerHTML = `
+    <h2 class="subHeaders">Edit task</h2>
+                    <div id="tInputs-div">
+                        <p id="project-name">${projectName}</p>
+                        <p id="task-number">${taskNumber}</p>
+                        <p>Task name:</p>
+                        <input type="text" id="taskName" class="inputs" value="${selectedProjectTaskList[i].taskName}">
+
+                        <p>Task description:</p>
+                        <input type="text" id="taskDescription" class="inputs" value="${selectedProjectTaskList[i].taskDescription}">
+
+                        <p>Start date:</p>
+                        <input type ="date" id="taskStartDateInput" class="inputs" value="${selectedProjectTaskList[i].taskStartDate}">
+
+                        <p>Due date:</p>
+                        <input type ="date" id="taskDueDateInput" class="inputs" value="${selectedProjectTaskList[i].taskDueDate}">
+                        
+                        <p>Priority:</p>
+                        <div class="dropdown2" id="task-priority">
+                                <div class="dropdown-btn" id="priority-btn"><h1>No priority</h1></div>
+                                <ul class="dropdown-ul" id="priority-ul">
+                                    <li><a href="#" id="priority-urgent">Urgent</a></li>
+                                    <li><a href="#" id="priority-medium">Medium</a></li>
+                                    <li><a href="#" id="priority-low">Low</a></li>
+                                </ul> 
+                            </div>
+                        <br>
+                        <p>Status:</p>
+                        <div class="dropdown" id="task-status">
+                                <div class="dropdown-btn" id="status-btn"><h1>No status</h1></div>
+                                    <ul class="dropdown-ul" id="status-ul">
+                                        <li><a href="#" id="status-working">Working on it</a></li>
+                                        <li><a href="#" id="status-stuck">Stuck</a></li>
+                                        <li><a href="#" id="status-done">Done</a></li>
+                                    </ul>
+                        </div>
+                        <br><br>
+                        <button id = "addTaskBtnDone" class = "btns" onclick="updateTaskInLocalStorage()">Done</button>
+                    </div>
+                `;
+        }
+    }
+    
+    changeStatus();
+    changePriority(event);
+    document.getElementById("project-name").style.display = "none";
+    document.getElementById("task-number").style.display = "none";
+    document.getElementById("task-adder").style.display = "inline";
+
+}
+
+function updateTaskInLocalStorage(){
+    var projectName = document.querySelector("[id='project-name']").innerHTML;
+    var taskId = document.querySelector("[id='task-number']").innerHTML;
+    var taskName = document.querySelector("[id='taskName']").value;
+    var taskDescription = document.querySelector("[id='taskDescription']").value;
+    var taskStartDate = document.querySelector("[id='taskStartDateInput']").value;
+    var taskDueDate = document.querySelector("[id='taskDueDateInput']").value;
+    var taskStatus = document.querySelector("[id='status-btn']").textContent;
+    var taskPriority = document.querySelector("[id='priority-btn']").textContent;
+
+    if(taskName.trim() == ""){
+        alert("Please fill in task name");
+        return;
+    }
+
+    const taskData = {taskName,taskDescription,taskStartDate,taskDueDate,taskStatus,taskPriority,taskId};
+
+    var taskListName = projectName + " " + "TaskList";
+    
+    var taskArray = JSON.parse(window.localStorage.getItem(taskListName)) || []; //henter ut data fra localstorage ved gitt navn (og putter i midlertidig var taskArray) eller skaper nytt array
+    
+    for(var i = 0;i<taskArray.length;i++){
+        if(taskArray[i].taskId == taskId){
+            taskArray.splice([i], 1, taskData); //Erstatter objektet i index-plass med telleren i, med variabelen taskData
+        }
+    }
+    window.localStorage.setItem(taskListName, JSON.stringify(taskArray)); //sender oppdatert array tilbake til localstorage
+    removeTaskAdderDiv();
+    renderTaskManager();
 }
 
 function generateTaskAdderDiv(projectName){
@@ -274,13 +358,17 @@ function renderTaskManager(){
                             </div>
                         </td>
                         <td></td>
-                        <td class="remove-task-btn-container"><button class="btns" onclick="removeSelectedTask('${projectName}','${taskList[i].taskId}')">Remove task</button></td>
+                        <td class="remove-task-btn-container">
+                            <button class="remove-task-btn" onclick="removeSelectedTask('${projectName}','${taskList[i].taskId}')">Remove</button>
+                            <button class="edit-task-btn" onclick="generateEditTaskDiv('${projectName}', '${taskList[i].taskId}')">Edit</button>
+                        </td>
+                    
         </tr>`
         
         }
         // Her produseres prosjekt-tabellen (template literal string med alle tilhørende radene settes inn også her via variabelen tasksTempString)
         projectEl.innerHTML +=
-            `<h1 id="projectNameStyle">${projectName} (${startDate}, ${dueDate})  <button class = "btns" onclick="generateTaskAdderDiv('${projectName}')">Add task</button></h1>
+            `<h1 id="projectNameStyle">${projectName} (${startDate}, ${dueDate})  <button onclick="generateTaskAdderDiv('${projectName}')">Add task</button></h1>
                 <table>
                     <tr>
                         <th>Task</th>
@@ -352,7 +440,8 @@ function changeStatus(){
             }
             
         }
-       
+
+
 function changePriority(event){
         var priorityBtn = document.getElementById("priority-btn");
         var newPriority = document.querySelector(".dropdown2");
