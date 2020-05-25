@@ -21,13 +21,14 @@ body {
 #container{
     min-height: 100%;
     position: relative;
+    margin-bottom: 50px;
 }
 
 header{
     position: fixed;
     width: 100%;
     top: 0;
-
+    z-index: 5;
 }
 #header-div{
     background-color: #262F37;
@@ -70,7 +71,8 @@ header{
     background-color: #262F37;
     border-radius: 20px;
     border: 2px solid black;
-
+    grid-row-start: 1;
+    grid-row-end: 2;
 }
   
 .adders{
@@ -96,9 +98,10 @@ header{
     display: none;
     height: auto;
     width: 200px;
-    left: 230px;
+    left: 2px;
     border-radius: 20px;
-    position: absolute;
+    border: coral 2px solid;
+    position: fixed;
     padding: 10px;
     z-index: 1;
 }
