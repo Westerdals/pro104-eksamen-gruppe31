@@ -23,7 +23,6 @@ function createNewTeamMember(memberInfo){
 
     memberInfo.target.reset();
     
-   
 
 }
 
@@ -304,6 +303,22 @@ function removeSelectedTask(projectName, taskNumber){
     window.localStorage.setItem(`${projectName} TaskList`, JSON.stringify(selectedProjectTaskList));
     renderTaskManager();
 }
+
+
+function removeAllWorkers(memberList){
+    
+    let removeWorkers = document.getElementById("remove-workers");
+    
+    let workersList = JSON.parse(window.localStorage.getItem("memberList"));
+    
+    for(var i=0; i<workersList.length; i++){
+        workersList.splice[i];
+    }
+    window.localStorage.setItem("memberList", JSON.stringify(removeWorkers));
+    renderWorkerList();
+    
+}
+
 
 function changeStatus(){
             var statusBtn = document.getElementById("status-btn");
