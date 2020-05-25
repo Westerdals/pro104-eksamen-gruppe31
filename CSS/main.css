@@ -15,12 +15,12 @@ body {
     margin-left: auto;
     margin-right: auto;
     height: 100vh;
-    display: flex;
+    width: 100vw;
     position: relative;
-    width: 90vw;
     margin: 0 auto;
     padding: 30px 20px;
     min-height: calc(100vh - 1083.6px - 58.4px);
+    display: grid;
 }
 
 .adders{
@@ -126,7 +126,7 @@ footer {
     padding: 20px;
     position: absolute;
     bottom: 0;
-    width: 100%; 
+    width: 100vw; 
 }
 
 header{
