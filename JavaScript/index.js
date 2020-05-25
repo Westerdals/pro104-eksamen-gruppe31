@@ -157,7 +157,8 @@ function generateTaskAdderDiv(projectName){
 
                         <p>Priority:</p>
                         <!-- fikse at dropdown og velging av riktig prioritet senere her -->
-
+                        <br>
+                        <br>
                         <button id = "addTaskBtn" class = "btns" type="submit">Add task to project</button>
                     </div>
                 </form>
