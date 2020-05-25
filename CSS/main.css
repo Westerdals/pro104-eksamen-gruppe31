@@ -262,25 +262,42 @@ td{
 #status-working{
     background-color:aqua;
 }
-
+.status-Working{
+    background-color:aqua;
+}
 
 #status-stuck{
+    background-color: brown;
+}
+.status-Stuck{
     background-color: brown;
 }
 
 #status-done{
     background-color:greenyellow;
 }
+.status-Done{
+    background-color:greenyellow;
+}
 
 #priority-urgent{
+    background-color: orangered;
+}
+.priority-Urgent{
     background-color: orangered;
 }
 
 #priority-medium{
     background-color: mediumpurple;
 }
+.priority-Medium{
+    background-color: mediumpurple;
+}
 
 #priority-low{
+    background-color:deepskyblue;
+}
+.priority-Low{
     background-color:deepskyblue;
 }
 

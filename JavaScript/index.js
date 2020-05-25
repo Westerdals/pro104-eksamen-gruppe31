@@ -1,3 +1,6 @@
+let taskIdCounter = 1;
+let statusIdCounter = 1;
+
 
 function createNewTeamMember(memberInfo){
     memberInfo.preventDefault();
@@ -194,10 +197,20 @@ function generateTaskAdderDiv(projectName){
 
 function updatePriorityInLocalStorage(newPriority,projectName,taskNumber){
     let selectedProjectTaskList = JSON.parse(window.localStorage.getItem(`${projectName} TaskList`));
-    console.log(newPriority, projectName, taskNumber);
     for(var i=0;i<selectedProjectTaskList.length;i++){
         if(taskNumber == selectedProjectTaskList[i].taskId){
             selectedProjectTaskList[i].taskPriority = newPriority;
+        }
+    }
+    window.localStorage.setItem(`${projectName} TaskList`, JSON.stringify(selectedProjectTaskList));
+    renderTaskManager();
+}
+
+function updateStatusInLocalStorage(newStatus,projectName,taskNumber){
+    let selectedProjectTaskList = JSON.parse(window.localStorage.getItem(`${projectName} TaskList`));
+    for(var i=0;i<selectedProjectTaskList.length;i++){
+        if(taskNumber == selectedProjectTaskList[i].taskId){
+            selectedProjectTaskList[i].taskStatus = newStatus;
         }
     }
     window.localStorage.setItem(`${projectName} TaskList`, JSON.stringify(selectedProjectTaskList));
@@ -208,8 +221,6 @@ function removeTaskAdderDiv(){
     document.getElementById("task-adder").style.display = "none";
 
 }
-
-let taskIdCounter = 1;
 
 function renderTaskManager(){
     let projectList = JSON.parse(window.localStorage.getItem("projectList")) || [];
@@ -233,7 +244,8 @@ function renderTaskManager(){
             <td id="${projectName}-${[i]}" ondragover="handleDragover(event)" ondrop="handleOndrop(event)">${taskList[i].taskWorker}</td>
                         <td>
                             <div class="dropdown2">
-                                <div class="dropdown-btn" id="priority-btn">             <h1>${taskList[i].taskPriority}</h1>
+                                <div class="dropdown-btn" id="priority-btn">
+                                <h1 class='priority-${taskList[i].taskPriority}'>${taskList[i].taskPriority}</h1>
                                 </div>
                                 <ul class="dropdown-ul" id="priority-ul">
                                     <li><a href="javascript:updatePriorityInLocalStorage('Urgent', '${projectName}', '${taskList[i].taskId}');" id="priority-urgent">Urgent</a></li>
@@ -245,12 +257,12 @@ function renderTaskManager(){
                         <td>
                             <div class="dropdown">
                                 <div class="dropdown-btn" id="status-btn">
-                                    <h1>${taskList[i].taskStatus}</h1>
+                                    <h1 class='status-${taskList[i].taskStatus}'>${taskList[i].taskStatus}</h1>
                                 </div>
                                 <ul class="dropdown-ul" id="status-ul">
-                                        <li><a href="#" id="status-working">Working on it</a></li>
-                                        <li><a href="#" id="status-stuck">Stuck</a></li>
-                                        <li><a href="#" id="status-done">Done</a></li>
+                                        <li><a href="javascript:updateStatusInLocalStorage('Working on it', '${projectName}', '${taskList[i].taskId}');" id="status-working">Working on it</a></li>
+                                        <li><a href="javascript:updateStatusInLocalStorage('Stuck', '${projectName}', '${taskList[i].taskId}');" id="status-stuck">Stuck</a></li>
+                                        <li><a href="javascript:updateStatusInLocalStorage('Done', '${projectName}', '${taskList[i].taskId}');" id="status-done">Done</a></li>
                                     </ul>
                             </div>
                         </td>
