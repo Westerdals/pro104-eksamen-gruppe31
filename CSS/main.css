@@ -306,6 +306,14 @@ td{
     margin-top: 20px;
 }
 
+.remove-task-btn{
+    margin: 3px;
+}
+
+.remove-task-btn-container{
+    text-align: center;
+}
+
 
 .dropdown-btn:hover + .dropdown-ul{
     

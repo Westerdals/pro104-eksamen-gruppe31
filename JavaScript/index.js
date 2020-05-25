@@ -266,8 +266,8 @@ function renderTaskManager(){
                                     </ul>
                             </div>
                         </td>
-                        <td>
-                        </td>
+                        <td></td>
+                        <td class="remove-task-btn-container"><button class="remove-task-btn" onclick="removeSelectedTask('${projectName}','${taskList[i].taskId}')">Remove task</button></td>
         </tr>`
         
         }
@@ -284,6 +284,7 @@ function renderTaskManager(){
                         <th>Priority</th>
                         <th>Status</th>
                         <th>Reminder</th>
+                        <th>Remove Task</th>
                     </tr>
 
                     ${tasksTempString}
@@ -291,6 +292,17 @@ function renderTaskManager(){
                 </table>`;
         tableList.appendChild(projectEl);
     }
+}
+
+function removeSelectedTask(projectName, taskNumber){
+    let selectedProjectTaskList = JSON.parse(window.localStorage.getItem(`${projectName} TaskList`));
+    for(var i = 0;i<selectedProjectTaskList.length;i++){
+        if(taskNumber == selectedProjectTaskList[i].taskId){
+            selectedProjectTaskList.splice([i], 1);
+        }
+    }
+    window.localStorage.setItem(`${projectName} TaskList`, JSON.stringify(selectedProjectTaskList));
+    renderTaskManager();
 }
 
 function changeStatus(){
