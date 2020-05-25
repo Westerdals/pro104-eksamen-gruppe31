@@ -274,13 +274,13 @@ function renderTaskManager(){
                             </div>
                         </td>
                         <td></td>
-                        <td class="remove-task-btn-container"><button class="remove-task-btn" onclick="removeSelectedTask('${projectName}','${taskList[i].taskId}')">Remove task</button></td>
+                        <td class="remove-task-btn-container"><button class="btns" onclick="removeSelectedTask('${projectName}','${taskList[i].taskId}')">Remove task</button></td>
         </tr>`
         
         }
         // Her produseres prosjekt-tabellen (template literal string med alle tilhørende radene settes inn også her via variabelen tasksTempString)
         projectEl.innerHTML +=
-            `<h1 id="projectNameStyle">${projectName} (${startDate}, ${dueDate})  <button onclick="generateTaskAdderDiv('${projectName}')">Add task</button></h1>
+            `<h1 id="projectNameStyle">${projectName} (${startDate}, ${dueDate})  <button class = "btns" onclick="generateTaskAdderDiv('${projectName}')">Add task</button></h1>
                 <table>
                     <tr>
                         <th>Task</th>
