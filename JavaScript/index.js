@@ -216,6 +216,10 @@ function generateEditTaskDiv(projectName, taskNumber){
     document.getElementById("project-name").style.display = "none";
      document.getElementById("task-number").style.display = "none";
     document.getElementById("task-adder").style.display = "inline";
+     document.getElementById("project-adder").style.transform = "translate(-220px, 220px)";
+    
+    document.getElementById("worker-adder").style.transform = "translate(-220px, 220px)";
+    
 
 }
 
