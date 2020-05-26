@@ -364,7 +364,7 @@ function renderTaskManager(){
             <td>${taskList[i].taskDescription}</td>
             <td>${taskList[i].taskStartDate}</td>
             <td>${taskList[i].taskDueDate}</td>
-            <td id="${projectName}-${[i]}" ondragover="handleDragover(event)" ondrop="handleOndrop(event)">${taskList[i].taskWorker}</td>
+            <td id="${projectName}-${[i]}" ondragover="handleDragover(event)" ondrop="handleOndrop(event)">${taskList[i].taskWorker ? taskList[i].taskWorker : ""}</td>
                         <td>
                             <div class="dropdown2-table-row">
                                 <div class="dropdown-btn" id="priority-btn">
