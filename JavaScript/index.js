@@ -199,8 +199,8 @@ function generateEditTaskDiv(projectName, taskNumber){
                         <div class="dropdown" id="task-status">
                                 <div class="dropdown-btn" id="status-btn"><h1>No status</h1></div>
                                     <ul class="dropdown-ul" id="status-ul">
-                                        <li><a href="#" id="status-working">Working on it</a></li>
-                                        <li><a href="#" id="status-stuck">Stuck</a></li>
+                                    <li><a href="#" id="status-stuck">Stuck</a></li>
+                                    <li><a href="#" id="status-working">In progress</a></li>
                                         <li><a href="#" id="status-done">Done</a></li>
                                     </ul>
                         </div>
@@ -287,8 +287,8 @@ function generateTaskAdderDiv(projectName){
                         <div class="dropdown" id="task-status">
                                 <div class="dropdown-btn" id="status-btn"><h1>No status</h1></div>
                                     <ul class="dropdown-ul" id="status-ul">
-                                        <li><a href="#" id="status-working">Working on it</a></li>
-                                        <li><a href="#" id="status-stuck">Stuck</a></li>
+                                    <li><a href="#" id="status-stuck">Stuck</a></li>
+                                    <li><a href="#" id="status-working">In progress</a></li>
                                         <li><a href="#" id="status-done">Done</a></li>
                                     </ul>
                         </div>
@@ -376,8 +376,8 @@ function renderTaskManager(){
                                     <h1 class='status-${taskList[i].taskStatus}'>${taskList[i].taskStatus}</h1>
                                 </div>
                                 <ul class="dropdown-ul" id="status-ul">
-                                        <li><a href="javascript:updateStatusInLocalStorage('Working on it', '${projectName}', '${taskList[i].taskId}');" id="status-working">Working on it</a></li>
                                         <li><a href="javascript:updateStatusInLocalStorage('Stuck', '${projectName}', '${taskList[i].taskId}');" id="status-stuck">Stuck</a></li>
+                                        <li><a href="javascript:updateStatusInLocalStorage('In progress', '${projectName}', '${taskList[i].taskId}');" id="status-working">In progress</a></li>
                                         <li><a href="javascript:updateStatusInLocalStorage('Done', '${projectName}', '${taskList[i].taskId}');" id="status-done">Done</a></li>
                                     </ul>
                             </div>
@@ -471,14 +471,14 @@ function changeStatus(event){
 
             var clickedStatus = event.target.id;
             
-
-            if (clickedStatus === "status-working"){
-                statusBtn.innerHTML = `<h1>Working on it</h1>`;
-                statusBtn.style.backgroundColor="aqua";
-            }
             if (clickedStatus === "status-stuck"){
                 statusBtn.innerHTML = `<h1>Stuck</h1>`;
-                statusBtn.style.backgroundColor="brown";
+                statusBtn.style.backgroundColor="red";
+             }    
+             if (clickedStatus === "status-working"){
+                statusBtn.innerHTML = `<h1>In progress</h1>`;
+                statusBtn.style.backgroundColor="yellow";
+           
             } 
             if (clickedStatus === "status-done"){
                 statusBtn.innerHTML = `<h1>Done</h1>`;
@@ -497,16 +497,16 @@ function changePriority(event){
 
             if(clickedPriority === "priority-urgent"){
                    priorityBtn.innerHTML = "<h1>Urgent</h1>";
-                   priorityBtn.style.backgroundColor = "orangered";
+                   priorityBtn.style.backgroundColor = "red";
                }
                if(clickedPriority ==="priority-medium"){
                    priorityBtn.innerHTML = "<h1>Medium</h1>";
-                   priorityBtn.style.backgroundColor= "mediumpurple";
+                   priorityBtn.style.backgroundColor= "yellow";
 
                }
                if(clickedPriority === "priority-low"){
                    priorityBtn.innerHTML = "<h1>Low</h1>";
-                   priorityBtn.style.backgroundColor = "deepskyblue";
+                   priorityBtn.style.backgroundColor = "greenyellow";
                }
 
         }

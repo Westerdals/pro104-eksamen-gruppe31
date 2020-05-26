@@ -353,21 +353,21 @@ td{
 }
 
 #status-working{
-    background-color:aqua;
+    background-color:yellow;
 }
 
 .status-Working{
-    background-color:aqua;
+    background-color:yellow;
     width: 100%;
     height: 100%;
     margin: auto;
 }
 
 #status-stuck{
-    background-color: brown;
+    background-color: red;
 }
 .status-Stuck{
-    background-color: brown;
+    background-color: red;
     width: 100%;
     height: 100%;
 }
@@ -382,44 +382,44 @@ td{
 }
 
 #priority-urgent{
-    background-color: orangered;
+    background-color: red;
 }
 .priority-Urgent{
-    background-color: orangered;
+    background-color: red;
     width: 100%;
     height: 100%;
 }
 .priority-urgent-row-li{
-    background-color: orangered;
+    background-color: red;
     width: 100%;
     height: 100%;
 }
 
 #priority-medium{
-    background-color: mediumpurple;
+    background-color: yellow;
 }
 .priority-Medium{
-    background-color: mediumpurple;
+    background-color: yellow;
     width: 100%;
     height: 100%;
 }
 .priority-medium-row-li{
-    background-color: mediumpurple;
+    background-color: yellow;
     width: 100%;
     height: 100%;
 }
 
 #priority-low{
-    background-color:deepskyblue;
+    background-color:greenyellow;
     text-align: center;
 }
 .priority-Low{
-    background-color:deepskyblue;
+    background-color:greenyellow;
     width: 100%;
     height: 100%;
 }
 .priority-low-row-li{
-    background-color: deepskyblue;
+    background-color: greenyellow;
     width: 100%;
     height: 100%;
 }
