@@ -200,7 +200,7 @@ function generateEditTaskDiv(projectName, taskNumber){
                                 <div class="dropdown-btn" id="status-btn"><h1>No status</h1></div>
                                     <ul class="dropdown-ul" id="status-ul">
                                     <li><a href="#" id="status-stuck">Stuck</a></li>
-                                    <li><a href="#" id="status-working">In progress</a></li>
+                                    <li><a href="#" id="status-progress">In progress</a></li>
                                         <li><a href="#" id="status-done">Done</a></li>
                                     </ul>
                         </div>
@@ -288,7 +288,7 @@ function generateTaskAdderDiv(projectName){
                                 <div class="dropdown-btn" id="status-btn"><h1>No status</h1></div>
                                     <ul class="dropdown-ul" id="status-ul">
                                     <li><a href="#" id="status-stuck">Stuck</a></li>
-                                    <li><a href="#" id="status-working">In progress</a></li>
+                                    <li><a href="#" id="status-progress">In progress</a></li>
                                         <li><a href="#" id="status-done">Done</a></li>
                                     </ul>
                         </div>
@@ -377,7 +377,7 @@ function renderTaskManager(){
                                 </div>
                                 <ul class="dropdown-ul" id="status-ul">
                                         <li><a href="javascript:updateStatusInLocalStorage('Stuck', '${projectName}', '${taskList[i].taskId}');" id="status-stuck">Stuck</a></li>
-                                        <li><a href="javascript:updateStatusInLocalStorage('In progress', '${projectName}', '${taskList[i].taskId}');" id="status-working">In progress</a></li>
+                                        <li><a href="javascript:updateStatusInLocalStorage('In progress', '${projectName}', '${taskList[i].taskId}');" id="status-progress">In progress</a></li>
                                         <li><a href="javascript:updateStatusInLocalStorage('Done', '${projectName}', '${taskList[i].taskId}');" id="status-done">Done</a></li>
                                     </ul>
                             </div>
@@ -475,7 +475,7 @@ function changeStatus(event){
                 statusBtn.innerHTML = `<h1>Stuck</h1>`;
                 statusBtn.style.backgroundColor="red";
              }    
-             if (clickedStatus === "status-working"){
+             if (clickedStatus === "status-progress"){
                 statusBtn.innerHTML = `<h1>In progress</h1>`;
                 statusBtn.style.backgroundColor="yellow";
            
