@@ -276,8 +276,9 @@ td{
     right: 0.1px;
     top: 0px;
     width: 123.5px;
-    height: 18.5px;
+    height: 30px;
     font-size: 10px;
+    margin-top: 20px;
 }
 
 .dropdown2{
@@ -285,8 +286,9 @@ td{
     right: 0.1px;
     top: 0px;
     width: 123.5px;
-    height: 18.5px;
+    height: 30px;
     font-size: 10px;
+    margin-top: 5px;
 }
 .dropdown-table-row{
     position:absolute;
