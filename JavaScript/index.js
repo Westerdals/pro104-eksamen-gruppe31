@@ -296,7 +296,7 @@ function generateTaskAdderDiv(projectName){
                         <button id = "addTaskBtnDone" class = "btns" onclick="removeTaskAdderDiv()">Done</button>
                     </div>
                 `;
-    changeStatus();
+    changeStatus(event);
     changePriority(event);
     document.getElementById("project-name").style.display = "none";
     
@@ -461,7 +461,7 @@ function removeAllWorkers(memberList){
 }
 
 
-function changeStatus(){
+function changeStatus(event){
             var statusBtn = document.getElementById("status-btn");
         
             var newStatus = document.querySelector(".dropdown");
