@@ -273,6 +273,7 @@ function generateTaskAdderDiv(projectName){
                         <input type ="date" id="taskDueDateInput" class="inputs">
                         
                         <p>Priority:</p>
+                    
                         <div class="dropdown2" id="task-priority">
                                 <div class="dropdown-btn" id="priority-btn"><h1>No priority</h1></div>
                                 <ul class="dropdown-ul" id="priority-ul">
@@ -383,8 +384,8 @@ function renderTaskManager(){
                         </td>
                         <td></td>
                         <td class="remove-task-btn-container">
-                            <button class="remove-task-btn" onclick="removeSelectedTask('${projectName}','${taskList[i].taskId}')">Remove</button>
-                            <button class="edit-task-btn" onclick="generateEditTaskDiv('${projectName}', '${taskList[i].taskId}')">Edit</button>
+                            <button class="smallTableBtn" onclick="removeSelectedTask('${projectName}','${taskList[i].taskId}')">Remove</button>
+                            <button class="smallTableBtn" onclick="generateEditTaskDiv('${projectName}', '${taskList[i].taskId}')">Edit</button>
                         </td>
                     
         </tr>`
@@ -392,7 +393,7 @@ function renderTaskManager(){
         }
         // Her produseres prosjekt-tabellen (template literal string med alle tilhørende radene settes inn også her via variabelen tasksTempString)
         projectEl.innerHTML +=
-            `<h1 id="projectNameStyle">${projectName} (${startDate}, ${dueDate})  <button onclick="generateTaskAdderDiv('${projectName}')">Add task</button> <button onclick="deleteProject('${projectName}')"> Delete project</button></h1>
+            `<h1 id="projectNameStyle">${projectName} (${startDate}, ${dueDate})  <button class = "tableBtns" onclick="generateTaskAdderDiv('${projectName}')">Add task</button> <button class = "tableBtns" onclick="deleteProject('${projectName}')"> Delete project</button></h1>
                 <table>
                     <tr>
                         <th>Task</th>
