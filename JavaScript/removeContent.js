@@ -10,11 +10,8 @@ function removeTaskAdderDiv(){
 
 function deleteProject(projectName){
     var confirmDeletion = prompt("Are you sure? The Project and all its tasks will be lost. Write yes to confirm deletion of the project.").toLowerCase();
-    console.log(confirmDeletion);
 
     var projectList = JSON.parse(window.localStorage.getItem("projectList"));
-
-    console.log(projectList);
 
     if(confirmDeletion == "yes"){
         for(var i = 0;i<projectList.length;i++){
