@@ -30,13 +30,14 @@ header{
     top: 0;
     z-index: 5;
 }
+
 #header-div{
     background-color: #262F37;
     border: black 2px;
     height: 90px;
     width: 100%;
 }
-
+/* Plassering av logoen */
 #headerImg{
     position: relative;
     height: 120px;
@@ -44,28 +45,32 @@ header{
     margin-top: -15px;
     margin-left: 45%;   
 }
+
+/*Grid container med gitte template areas for responsivt design */
 #grid-container {
     margin-top: 95px;
     display: grid;
     grid-template-columns: 210px auto auto 200px;
     grid-template-rows: 1fr 1fr 1fr;
-    gap: 5px 5px;
+    grid-gap: 5px 5px;
     grid-template-areas:
     "menu-div table-list table-list worker-list-container"
     "menu-div table-list table-list worker-list-container"
     "menu-div table-list table-list worker-list-container";
   }
-      
+/* Menu-div som grid area, er en container for alle elementer til venstre i grid-container */      
 #menu-div {
     grid-area: menu-div;
     
   }
 
+/* Samme som over, en container for elementer som skal være midt i grid-container */
 #table-list {
     grid-area: table-list;
 
   }
 
+/* Element til høyre i grid-container. Style for div som inneholder arbeidere man har lagt til */
 #worker-list-container {
     grid-area: worker-list-container;
     color: whitesmoke;
@@ -81,12 +86,13 @@ header{
     padding-top: 20px;
     margin-left: 45px;
 }
-  
+/* Style for alle adders */  
 .adders{
     color: whitesmoke;
     background-color: #262F37;
 }
 
+/* Style for div man legger til prosjekter */
 #project-adder{
     height: 250px;
     width: 200px;
@@ -96,13 +102,15 @@ header{
     border:#e14da8 2px solid;
    
 }
-
+/* Style for prosjekt-button */
 #pBtn-div{
     top: 200px;
     left: 10px;
     position: absolute;  
 }
 
+
+/* Style for div man legger til tasks */
 #task-adder{
     grid-area: menu-div;
     display: none;
@@ -122,6 +130,7 @@ header{
     position: absolute;
 }
 
+/* Style for div man legger til workers */
 #worker-adder{
     height: 300px;
     width: 200px;
@@ -137,6 +146,7 @@ header{
     position: absolute;
 }
 
+/* Workers-button */
 #wBtn-div{
     position: relative;
     top: 200px;
@@ -151,7 +161,7 @@ header{
     
 }
 
-
+/* Style buttons for workers og projects adders  */
 .btns {
 	box-shadow: 0px 1px 0px 0px #1c1b18;
 	background-color:#eae0c2;
@@ -168,6 +178,7 @@ header{
 	text-shadow:0px 1px 0px #ffffff;
 }
 
+/* Style buttons for table adders */
 .tableBtns {
 	box-shadow: 0px 1px 0px 0px #1c1b18;
 	background-color:#262F37;
@@ -183,6 +194,7 @@ header{
     margin-bottom: 5px;
 }
 
+/* Style buttons for edit og remove task inne i table */
 .smallTableBtn{
     box-shadow: 0px 1px 0px 0px #1c1b18;
 	background-color:#262F37;
@@ -201,6 +213,7 @@ header{
 
 }
 
+/* Kule effekter ved hovers og active på buttons */
 .smallTableBtn:hover {
     background-color:rgba(38, 47, 55, 0.719);
 
@@ -251,6 +264,7 @@ header{
     text-shadow: 2px 2px 3px #000;
 }
 
+/* Style for table, th = table-header, td = table data(cells) */
 table {
     border-collapse: collapse;
     margin-bottom: 50px;
@@ -271,6 +285,8 @@ td{
     position: relative;
     text-align: center;
 }
+
+/* Style for dropdown-menyene inne i table - priority og status */
 .dropdown{
     position:absolute;
     right: 0.1px;
@@ -323,6 +339,8 @@ td{
     
 }
 
+/* Style for innhold/listene inne i dropdowns */
+
 .dropdown-ul{
     position:absolute;
     margin:0;
@@ -354,6 +372,7 @@ td{
     
 }
 
+/* Style for alternativene i dropdowns */
 
 #status-progress{
     background-color:yellow;
@@ -431,6 +450,8 @@ td{
     height: 100%;
 }
 
+/* Style for button remove task */
+
 .remove-task-btn{
     margin: 3px;
 }
@@ -439,7 +460,7 @@ td{
     text-align: center;
 }
 
-
+/* Default er display none, hover over å se alternativer i dropdowns */
 .dropdown-btn:hover + .dropdown-ul{
     
     display:block;
@@ -461,7 +482,7 @@ td{
     left: 15px;
 }
 
-
+/* Style for footer */
 footer{
     text-align: center;
     background-color: #262F37;
