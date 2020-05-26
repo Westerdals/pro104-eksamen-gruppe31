@@ -32,8 +32,6 @@ function createNewTeamMember(memberInfo){
     renderWorkerList();
 
     memberInfo.target.reset();
-    
-
 }
 
 function renderWorkerList(){
@@ -213,7 +211,7 @@ function generateEditTaskDiv(projectName, taskNumber){
         }
     }
     
-    changeStatus();
+    changeStatus(event);
     changePriority(event);
     document.getElementById("project-name").style.display = "none";
      document.getElementById("task-number").style.display = "none";
@@ -248,9 +246,6 @@ function updateTaskInLocalStorage(){
         }
     }
     window.localStorage.setItem(taskListName, JSON.stringify(taskArray)); //sender oppdatert array tilbake til localstorage
-    
-    
-    
     
     removeTaskAdderDiv();
     renderTaskManager();
@@ -416,14 +411,14 @@ function renderTaskManager(){
 }
 
 function deleteProject(projectName){
-    var bekreftSletting = prompt("Er du sikker? Prosjektet og alle tasks vil gå tapt. Skriv ja for å fullføre sletting av prosjekt.").toLowerCase();
-    console.log(bekreftSletting);
+    var confirmDeletion = prompt("Are you sure? The Project and all its tasks will be lost. Write yes to confirm deletion of the project.").toLowerCase();
+    console.log(confirmDeletion);
 
     var projectList = JSON.parse(window.localStorage.getItem("projectList"));
 
     console.log(projectList);
 
-    if(bekreftSletting == "ja"){
+    if(confirmDeletion == "yes"){
         for(var i = 0;i<projectList.length;i++){
             if(projectList[i].projectName == projectName){
                 projectList.splice([i], 1);
