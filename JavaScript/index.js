@@ -201,7 +201,7 @@ function generateEditTaskDiv(projectName, taskNumber){
                                     <ul class="dropdown-ul" id="status-ul">
                                     <li><a href="#" id="status-stuck">Stuck</a></li>
                                     <li><a href="#" id="status-progress">In progress</a></li>
-                                        <li><a href="#" id="status-done">Done</a></li>
+                                    <li><a href="#" id="status-done">Done</a></li>
                                     </ul>
                         </div>
                         <br><br>
@@ -283,7 +283,11 @@ function generateTaskAdderDiv(projectName){
                                 </ul> 
                             </div>
                         <br>
+                        <br>
+
+                        
                         <p>Status:</p>
+                        
                         <div class="dropdown" id="task-status">
                                 <div class="dropdown-btn" id="status-btn"><h1>No status</h1></div>
                                     <ul class="dropdown-ul" id="status-ul">

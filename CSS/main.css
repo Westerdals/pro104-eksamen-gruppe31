@@ -352,11 +352,12 @@ td{
     
 }
 
-#status-working{
+
+#status-progress{
     background-color:yellow;
 }
 
-.status-Working{
+.status-In{
     background-color:yellow;
     width: 100%;
     height: 100%;
