@@ -1,28 +1,30 @@
-//Henter counter til task-id fra localStorage for å unngå at flere får samme ved reload av side
+//Henter counter til task-id fra localStorage for å unngå at flere får samme ved reload av side.
+//Funksjonen setter igang telleren på 1 eller henter ut eksisterende
 function initializeTaskIdCounter(){
     let taskIdCounter = JSON.parse(window.localStorage.getItem("taskIdCounter")) || 1;
     window.localStorage.setItem("taskIdCounter", JSON.stringify(taskIdCounter));
 }
 
-initializeTaskIdCounter();
-
+//Funksjon for å øke telleren i localstorage. Denne brukes hver gang en task legges til i localStorage
 function incrementTaskIdCounter(){
-    let taskIdCounter = JSON.parse(window.localStorage.getItem("taskIdCounter"));
+    let taskIdCounter = JSON.parse(window.localStorage.getItem("taskIdCounter")); //Henter ut string fra localStorage og omgjør til tall
+    parseInt(taskIdCounter); //Parser til int, failsafe hvis taskIdCounter noen gang skulle bli lagret som string
     taskIdCounter++;
-    window.localStorage.setItem("taskIdCounter", JSON.stringify(taskIdCounter));
+    window.localStorage.setItem("taskIdCounter", JSON.stringify(taskIdCounter)); //Lagrer tilbake i localStorage (overwriter gamle objektet)
 }
 
+//Funksjon for å la bruker legge til nytt team-medlem til drag-n-drop div
 function createNewTeamMember(memberInfo){
-    memberInfo.preventDefault();
+    memberInfo.preventDefault(); //Forhindrer at form sender info via adresse-linjen
 
-    var teamMemberName = document.querySelector("[id='workerName']").value;
+    var teamMemberName = document.querySelector("[id='workerName']").value; //henter info fra form
     var jobTitle = document.querySelector("[id='workerTitle']").value;
 
-    var memberData = {teamMemberName, jobTitle};
+    var memberData = {teamMemberName, jobTitle}; //
 
     var memberList = JSON.parse(window.localStorage.getItem("memberList")) || [];
     
-    if(teamMemberName.length === 0){
+    if(teamMemberName.length === 0){ //Sørger for at bruker ikke kan fylle inn tomt på navn
         alert("Please fill in worker name")
     }else{
     memberList.push(memberData);
@@ -31,20 +33,17 @@ function createNewTeamMember(memberInfo){
     
     renderWorkerList();
 
-    memberInfo.target.reset();
+    memberInfo.target.reset(); //Resetter input feltene i formen
 }
 
+//Funksjon for å printe ut/generere drag-n-drop boksen og team members fra localStorage
 function renderWorkerList(){
 
-    let memberList = JSON.parse(window.localStorage.getItem("memberList")) || [];
-    let workerList = document.getElementById("worker-list");
+    let memberList = JSON.parse(window.localStorage.getItem("memberList")) || []; //String array i localStorage for å holde team-workers
+    let workerList = document.getElementById("worker-list"); //Henter div for å legge memberList
     workerList.innerHTML = "";
-    
-    if (memberList == undefined){
-        memberList = [];
-    }
      
-    for(memberData of memberList){
+    for(memberData of memberList){ //Printer ut workers fra array
         const workerEl = document.createElement("div");
         workerEl.draggable = true;
         workerEl.ondragstart = handleOndragstart;
@@ -64,6 +63,7 @@ function renderWorkerList(){
       
     }
 
+    //DRAG-N-DROP: Plukker opp navnet til en arbeider
 function handleOndragstart(event){
     
     var teamMemberNameEl = event.target.querySelector("h4").innerText;
@@ -71,13 +71,14 @@ function handleOndragstart(event){
     
 }
 
-
+    //DRAG-N-DROP: Sørger for at arbeider-tekst blir kopiert
 function handleDragover(event){
     event.preventDefault();
     event.dataTransfer.dropEffect = "copy";
     
 }
 
+    //DRAG-N-DROP: henter inn unik id til tasken man dropper worker, samt teksten fra elementet man dropper
 function handleOndrop(event){
     var taskListId = event.path[0].id;
     var teamMemberNameEl = event.dataTransfer.getData("text/plain");
@@ -85,22 +86,25 @@ function handleOndrop(event){
     handleDragDropWorker(teamMemberNameEl, taskListId);
 }
 
+    //DRAG-N-DROP: Vi bruker dataen på dragndrop og vi plasserer de i localStorage
 function handleDragDropWorker(teamMemberNameEl, taskListId){
     let projectAndPosition = taskListId.split("-");
     let taskList = JSON.parse(window.localStorage.getItem(projectAndPosition[0] + " TaskList")) || [];
     var taskWorker = document.querySelector("[id='"+ taskListId +"']");
     
     let taskPosition = parseInt(projectAndPosition[1]);
-    // this is a ternary operator
+
+    // Ternary operator - sjekker om det eksisterer noe allerede i workers, og legger til komma hvis det stemmer
     let workerString = taskList[taskPosition].taskWorker ? taskList[taskPosition].taskWorker + ', ' + teamMemberNameEl : teamMemberNameEl;
+
     taskWorker.innerText = workerString;
     taskList[taskPosition].taskWorker = workerString;
     window.localStorage.setItem(projectAndPosition[0] + " TaskList", JSON.stringify(taskList));
     
 }
     
-
-function createNewProject(event){
+    //Funksjon for å behandle data-input fra bruker og lagre det i localStorage.
+function createNewProject(event){ //Passer et form som parameter
     event.preventDefault();
 
     var projectName = document.querySelector("[id='projectNameInput']").value;
@@ -111,21 +115,20 @@ function createNewProject(event){
     
     let projectList = JSON.parse(window.localStorage.getItem("projectList")) || [];
 
-    if(projectName.length === 0){
+    if(projectName.length === 0){ //Sørger for at bruker må gi prosjektet et navn
         alert("Please fill in project name");
     }else{
     projectList.push(projectData);
     window.localStorage.setItem("projectList", JSON.stringify(projectList));
     }
     
-    renderTaskManager();
+    renderTaskManager(); //Oppdaterer siden
 
     event.target.reset();
 }
 
+    //Funksjon som tar
 function addTaskToProject(){ 
-    //Man kan her evt sende inn projectName som parameter for å lage egen liste med unikt navn til prosjektets tasks
-    //taskInput.preventDefault();
 
     var projectName = document.querySelector("[id='project-name']").innerHTML;
     var taskName = document.querySelector("[id='taskName']").value;
@@ -214,9 +217,9 @@ function generateEditTaskDiv(projectName, taskNumber){
     changeStatus(event);
     changePriority(event);
     document.getElementById("project-name").style.display = "none";
-     document.getElementById("task-number").style.display = "none";
+    document.getElementById("task-number").style.display = "none";
     document.getElementById("task-adder").style.display = "inline";
-     document.getElementById("project-adder").style.transform = "translate(-220px, 220px)";
+    document.getElementById("project-adder").style.transform = "translate(-220px, 220px)";
     
     document.getElementById("worker-adder").style.transform = "translate(-220px, 220px)";
     
@@ -465,7 +468,7 @@ function removeAllWorkers(memberList){
     
 }
 
-
+    //Dropdown-meny: Event click gir gitt status med farge og oppdaterer dette
 function changeStatus(event){
             var statusBtn = document.getElementById("status-btn");
         
@@ -491,7 +494,7 @@ function changeStatus(event){
             
         }
 
-
+    //Dropdown-meny: Event click gir gitt prioritet med farge og oppdaterer dette
 function changePriority(event){
         var priorityBtn = document.getElementById("priority-btn");
         var newPriority = document.querySelector(".dropdown2");
@@ -514,5 +517,8 @@ function changePriority(event){
                }
 
         }
+
+    //Kaller på funksjoner
 renderWorkerList();
 renderTaskManager();
+initializeTaskIdCounter();
