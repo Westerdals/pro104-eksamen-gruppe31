@@ -42,7 +42,7 @@ header{
     height: 120px;
     width: 100px;
     margin-top: -15px;
-    margin-left: 670px;   
+    margin-left: 45%;   
 }
 #grid-container {
     margin-top: 95px;
@@ -357,6 +357,10 @@ td{
 
 #status-progress{
     background-color:yellow;
+}
+
+#edit-task-p{
+    margin-top: 18px;
 }
 
 .status-In{

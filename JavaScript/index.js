@@ -195,7 +195,7 @@ function generateEditTaskDiv(projectName, taskNumber){
                                 </ul> 
                             </div>
                         <br>
-                        <p>Status:</p>
+                        <p id="edit-task-p">Status:</p>
                         <div class="dropdown" id="task-status">
                                 <div class="dropdown-btn" id="status-btn"><h1>No status</h1></div>
                                     <ul class="dropdown-ul" id="status-ul">
