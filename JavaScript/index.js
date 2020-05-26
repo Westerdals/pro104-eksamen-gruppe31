@@ -345,6 +345,7 @@ function removeTaskAdderDiv(){
 
 }
 
+    //Funksjon ansvarlig for printing av Prosjekter og radene i hvert prosjekt
 function renderTaskManager(){
     let projectList = JSON.parse(window.localStorage.getItem("projectList")) || [];
     let tableList = document.getElementById("table-list");
@@ -357,14 +358,15 @@ function renderTaskManager(){
         var tasksTempString = "";
         
         let taskList = JSON.parse(window.localStorage.getItem(`${projectName} TaskList`)) || [];
-        for(var i = 0;i<taskList.length;i++){ //Her produsers alle radene til en string som senere puttes inn i en tabell
+        for(var i = 0;i<taskList.length;i++){ 
+            //Her produsers alle radene til en string som senere puttes inn i en tabell
         tasksTempString += `
         <tr>
             <td>${taskList[i].taskName}</td>
             <td>${taskList[i].taskDescription}</td>
             <td>${taskList[i].taskStartDate}</td>
             <td>${taskList[i].taskDueDate}</td>
-            <td id="${projectName}-${[i]}" ondragover="handleDragover(event)" ondrop="handleOndrop(event)">${taskList[i].taskWorker}</td>
+            <td id="${projectName}-${[i]}" ondragover="handleDragover(event)" ondrop="handleOndrop(event)">${taskList[i].taskWorker ? taskList[i].taskWorker : ''}</td>
                         <td>
                             <div class="dropdown2-table-row">
                                 <div class="dropdown-btn" id="priority-btn">
@@ -417,10 +419,12 @@ function renderTaskManager(){
                     ${tasksTempString}
 
                 </table>`;
+
         tableList.appendChild(projectEl);
        
     }
 }
+
 
 function deleteProject(projectName){
     var confirmDeletion = prompt("Are you sure? The Project and all its tasks will be lost. Write yes to confirm deletion of the project.").toLowerCase();
@@ -441,6 +445,7 @@ function deleteProject(projectName){
     window.localStorage.setItem("projectList", JSON.stringify(projectList));
     renderTaskManager();
 }
+
 
 function removeSelectedTask(projectName, taskNumber){
     let selectedProjectTaskList = JSON.parse(window.localStorage.getItem(`${projectName} TaskList`));
