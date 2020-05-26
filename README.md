@@ -15,3 +15,5 @@ NOTICE
 
 This is the intellectual property of Høyskole i Kristiania
 and is made by pro104-eksamen-gruppe31. 
+
+Optimized for Google Chrome.
