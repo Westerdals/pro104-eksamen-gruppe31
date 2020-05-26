@@ -53,11 +53,12 @@ function renderWorkerList(){
         
         var {teamMemberName, jobTitle} = memberData;
         workerEl.style.border = "2px solid black";
-        workerEl.style.borderRadius="30%";
+        workerEl.style.borderRadius="40%";
         workerEl.style.padding = "5px";
         workerEl.style.textAlign="center";
         workerEl.style.marginTop="2px";
-        workerEl.style.backgroundColor="lightgreen";
+        workerEl.style.color = "black";
+        workerEl.style.backgroundColor="#ffcc99";
         workerEl.innerHTML = "<h4>" + teamMemberName + "</h4>" + "<p>" + jobTitle + "</p>";
         workerList.appendChild(workerEl);
             
@@ -215,7 +216,7 @@ function generateEditTaskDiv(projectName, taskNumber){
     changeStatus();
     changePriority(event);
     document.getElementById("project-name").style.display = "none";
-    document.getElementById("task-number").style.display = "none";
+     document.getElementById("task-number").style.display = "none";
     document.getElementById("task-adder").style.display = "inline";
 
 }
@@ -247,6 +248,10 @@ function updateTaskInLocalStorage(){
         }
     }
     window.localStorage.setItem(taskListName, JSON.stringify(taskArray)); //sender oppdatert array tilbake til localstorage
+    
+    
+    
+    
     removeTaskAdderDiv();
     renderTaskManager();
 }
@@ -295,7 +300,13 @@ function generateTaskAdderDiv(projectName){
     changeStatus();
     changePriority(event);
     document.getElementById("project-name").style.display = "none";
+    
     document.getElementById("task-adder").style.display = "inline";
+    
+    document.getElementById("project-adder").style.transform = "translate(-220px, 220px)";
+    
+    document.getElementById("worker-adder").style.transform = "translate(-220px, 220px)";
+    
 }
 
 function updatePriorityInLocalStorage(newPriority,projectName,taskNumber){
@@ -322,6 +333,8 @@ function updateStatusInLocalStorage(newStatus,projectName,taskNumber){
 
 function removeTaskAdderDiv(){
     document.getElementById("task-adder").style.display = "none";
+    document.getElementById("project-adder").style.transform = "translate(0px, 0px)";
+    document.getElementById("worker-adder").style.transform = "translate(0px, 0px)";
 
 }
 
@@ -398,6 +411,7 @@ function renderTaskManager(){
 
                 </table>`;
         tableList.appendChild(projectEl);
+       
     }
 }
 
